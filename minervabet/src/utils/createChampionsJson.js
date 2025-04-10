@@ -27,7 +27,6 @@ async function createChampionJson() {
         resolvedData += ",\n";
       }
 
-      console.log(data.name);
       resolvedData += `  "${data.key}": "${data.name}"`;
 
       if (firstIter) {

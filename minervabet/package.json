@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "champions": "node src/utils/createChampionsJson.js"
+    "champions": "node src/utils/createChampionsJson.js",
+    "championsIcons": "node src/utils/saveChampionsIcons.js"
   },
   "dependencies": {
     "axios": "^1.8.4",
