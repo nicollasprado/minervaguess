@@ -7,6 +7,8 @@ interface H3props {
 
 export default function H3({ children, className }: H3props) {
   return (
-    <h3 className={`font-medium text-white text-[0.7dvw] ${className}`}>{children}</h3>
+    <h3 className={`font-medium text-white text-[0.95rem] ${className}`}>
+      {children}
+    </h3>
   );
 }

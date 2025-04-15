@@ -7,7 +7,7 @@ interface Pprops {
 
 export default function P({ children, className }: Pprops) {
   return (
-    <p className={`font-normal text-white text-[0.6dvw] ${className}`}>
+    <p className={`font-normal text-white text-sm ${className}`}>
       {children}
     </p>
   );
