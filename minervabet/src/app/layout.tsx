@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Poppins } from "next/font/google";
-import { QueryClientProvider } from "@tanstack/react-query";
-import { queryClient } from "@/services/queryClient";
+import { TanstackProvider } from "@/components/provider/tanstackProvider";
 
 const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -21,9 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <QueryClientProvider client={queryClient}>
+      <TanstackProvider>
         <body className={`${poppins.className} antialiased`}>{children}</body>
-      </QueryClientProvider>
+      </TanstackProvider>
     </html>
   );
 }

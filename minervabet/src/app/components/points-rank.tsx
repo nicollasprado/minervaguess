@@ -8,7 +8,7 @@ export default function PointsRank() {
       <div className="border-b-[0.1dvw] border-white py-[1.5dvh]">
         <H1 className="text-center">VIEWERS COM MAIS PONTOS</H1>
       </div>
-      <div className="flex flex-col items-center gap-5 justify-center">
+      <div className="flex flex-col m-auto gap-5">
         <ViewerCard
           championName="Ahri"
           username="nicollasmp"
