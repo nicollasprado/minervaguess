@@ -20,10 +20,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <QueryClientProvider client={queryClient}>
-      <html lang="pt-br">
+    <html lang="pt-br">
+      <QueryClientProvider client={queryClient}>
         <body className={`${poppins.className} antialiased`}>{children}</body>
-      </html>
-    </QueryClientProvider>
+      </QueryClientProvider>
+    </html>
   );
 }
