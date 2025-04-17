@@ -26,7 +26,11 @@ async function saveChampionsIcons() {
 
   await Promise.all(
     Object.keys(champions).map(async (key) => {
-      let filePath = path.resolve("public", "champions_icons", `${key}.png`);
+      let filePath = path.resolve(
+        "public",
+        "champions_icons",
+        `${key.toUpperCase()}.png`
+      );
 
       const championImg = await axios.get(
         `https://ddragon.leagueoflegends.com/cdn/15.6.1/img/champion/${key}.png`,
