@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "next lint",
     "champions": "node src/utils/createChampionsJson.js",
-    "championsIcons": "node src/utils/saveChampionsIcons.js"
+    "championsIcons": "node src/utils/saveChampionsIcons.js",
+    "runes": "node src/utils/createRunesJson.js"
   },
   "dependencies": {
     "@prisma/client": "^6.6.0",
