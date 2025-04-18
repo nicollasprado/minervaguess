@@ -4,7 +4,7 @@ import ViewerCard from "../components/viewer-card";
 
 export default function PointsRank() {
   return (
-    <aside className="h-[100dvh] w-[17%] bg-zinc-500 flex flex-col justify-between">
+    <aside className="min-w-[15%] bg-zinc-500 flex flex-col justify-between">
       <div className="border-b-[0.1dvw] border-white py-[1.5dvh]">
         <H1 className="text-center">VIEWERS COM MAIS PONTOS</H1>
       </div>
