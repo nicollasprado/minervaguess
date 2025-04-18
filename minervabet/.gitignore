@@ -42,3 +42,4 @@ next-env.d.ts
 
 # icons
 public/champions_icons
+public/runes_icons
