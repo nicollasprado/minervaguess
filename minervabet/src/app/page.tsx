@@ -1,27 +1,62 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
 import PointRank from "./components/points-rank";
+import TeamsDisplay from "./components/teams-display";
+import { gameData } from "@/utils/gameDataInterface";
 import axios from "axios";
+import { useQuery } from "@tanstack/react-query";
+import Header from "./components/header";
 
-const getGameData = async () => {
-  const data = await axios.get("/api/match");
-  console.log(data.data);
+const GetGameData = async () => {
+  const response = await axios.get<gameData>("/api/match");
+  return response.data;
 };
 
 export default function Home() {
-  const { data, isError, isLoading } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["game"],
-    queryFn: getGameData,
+    queryFn: GetGameData,
   });
 
+  if (isLoading) {
+    return (
+      <div className="flex w-screen h-[100dvh]">
+        <PointRank />
+        <main className="min-w-[70dvw] bg-zinc-800 flex flex-col">
+          <Header />
+
+          <h2 className="text-gray-400 text-center font-bold text-3xl">
+            Obtendo dados da partida...
+          </h2>
+        </main>
+        <PointRank />
+      </div>
+    );
+  }
+
+  if (!data) {
+    return (
+      <div className="flex w-screen h-[100dvh]">
+        <PointRank />
+        <main className="min-w-[70dvw] bg-zinc-800 flex flex-col">
+          <Header />
+
+          <h2 className="text-red-400 text-center font-bold text-3xl">
+            Partida não encontrada
+          </h2>
+        </main>
+        <PointRank />
+      </div>
+    );
+  }
+
   return (
-    <div className="flex">
+    <div className="flex w-screen h-[100dvh]">
       <PointRank />
-      <main className="bg-zinc-800 w-[66%]">
-        <h1 className="font-extrabold text-white text-4xl text-center my-[1.5dvh]">
-          MINERVABET
-        </h1>
+      <main className="min-w-[70dvw] bg-zinc-800 flex flex-col">
+        <Header />
+
+        <TeamsDisplay data={data} />
       </main>
       <PointRank />
     </div>

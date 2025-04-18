@@ -9,6 +9,16 @@ const subrunesData: Record<number, string> = subrunes;
 export const getChampionIcon = (championId: number) => {
   let championName = championsData[championId];
   championName = championName.toUpperCase().replace(" ", "").replace("'", "");
+
+  switch (championName) {
+    case "RENATAGLASC":
+      championName = "RENATA";
+      break;
+    case "WUKONG":
+      championName = "MONKEYKING";
+      break;
+  }
+
   return `/champions_icons/${championName}.png`;
 };
 
