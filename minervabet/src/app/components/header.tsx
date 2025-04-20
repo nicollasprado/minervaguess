@@ -1,6 +1,6 @@
 import H3 from "@/components/H3";
 import P from "@/components/P";
-import { User } from "lucide-react";
+import UserDropdownDefault from "./user-dropdown-default";
 
 export default function Header() {
   return (
@@ -14,7 +14,7 @@ export default function Header() {
           <H3>nicollasmp</H3>
           <P>1231234 pontos</P>
         </div>
-        <User size={38} className="text-white" />
+        <UserDropdownDefault />
       </div>
     </header>
   );
