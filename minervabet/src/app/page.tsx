@@ -7,6 +7,7 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import Header from "./components/header";
 import BetForm from "./components/bet-form";
+import { useSession } from "next-auth/react";
 
 const GetGameData = async () => {
   const response = await axios.get<gameData>("/api/match");
@@ -14,17 +15,20 @@ const GetGameData = async () => {
 };
 
 export default function Home() {
-  const { data, isLoading } = useQuery({
+  const { data: gameData, isLoading } = useQuery({
     queryKey: ["game"],
     queryFn: GetGameData,
   });
+
+  const { data: session } = useSession();
+  const username = session?.user?.name ? session?.user?.name : "";
 
   if (isLoading) {
     return (
       <div className="flex w-screen h-[100dvh]">
         <PointRank />
         <main className="min-w-[70dvw] bg-zinc-800 flex flex-col">
-          <Header />
+          <Header username={username} />
 
           <h2 className="text-gray-400 text-center font-bold text-3xl">
             Obtendo dados da partida...
@@ -35,12 +39,12 @@ export default function Home() {
     );
   }
 
-  if (!data) {
+  if (!gameData) {
     return (
       <div className="flex w-screen h-[100dvh]">
         <PointRank />
         <main className="min-w-[70dvw] bg-zinc-800 flex flex-col">
-          <Header />
+          <Header username={username} />
 
           <h2 className="text-red-400 text-center font-bold text-3xl">
             Partida não encontrada
@@ -55,9 +59,9 @@ export default function Home() {
     <div className="flex w-screen h-[100dvh]">
       <PointRank />
       <main className="min-w-[70dvw] bg-zinc-800 flex flex-col justify-around">
-        <Header />
+        <Header username={username} />
 
-        <TeamsDisplay data={data} />
+        <TeamsDisplay data={gameData} />
 
         <BetForm />
       </main>
