@@ -8,10 +8,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "champions": "node src/utils/createChampionsJson.js",
-    "championsIcons": "node src/utils/saveChampionsIcons.js",
-    "runes": "node src/utils/createRunesJson.js",
-    "runesIcons": "node src/utils/saveRunesIcons.js"
+    "champions": "node src/utils/scripts/createChampionsJson.js",
+    "championsIcons": "node src/utils/scripts/saveChampionsIcons.js",
+    "runes": "node src/utils/scripts/createRunesJson.js",
+    "runesIcons": "node src/utils/scripts/saveRunesIcons.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",

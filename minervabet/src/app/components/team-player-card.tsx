@@ -1,4 +1,4 @@
-import { gameParticipant } from "@/utils/gameDataInterface";
+import { gameParticipant } from "@/interfaces/gameDataInterface";
 import { getChampionIcon, getRuneIcon } from "@/utils/fetchDataJsons";
 import Image from "next/image";
 

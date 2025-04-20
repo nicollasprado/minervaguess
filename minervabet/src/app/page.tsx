@@ -2,7 +2,7 @@
 
 import PointRank from "./components/points-rank";
 import TeamsDisplay from "./components/teams-display";
-import { gameData } from "@/utils/gameDataInterface";
+import { gameData } from "@/interfaces/gameDataInterface";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import Header from "./components/header";

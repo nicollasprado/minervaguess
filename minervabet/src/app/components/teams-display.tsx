@@ -1,4 +1,4 @@
-import { gameData, gameParticipant } from "@/utils/gameDataInterface";
+import { gameData, gameParticipant } from "@/interfaces/gameDataInterface";
 import TeamPlayerCard from "./team-player-card";
 
 const minervaPuuid = process.env.NEXT_PUBLIC_MINERVA_PUUID;
