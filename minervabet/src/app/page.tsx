@@ -6,6 +6,7 @@ import { gameData } from "@/utils/gameDataInterface";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import Header from "./components/header";
+import BetForm from "./components/bet-form";
 
 const GetGameData = async () => {
   const response = await axios.get<gameData>("/api/match");
@@ -53,10 +54,12 @@ export default function Home() {
   return (
     <div className="flex w-screen h-[100dvh]">
       <PointRank />
-      <main className="min-w-[70dvw] bg-zinc-800 flex flex-col">
+      <main className="min-w-[70dvw] bg-zinc-800 flex flex-col justify-around">
         <Header />
 
         <TeamsDisplay data={data} />
+
+        <BetForm />
       </main>
       <PointRank />
     </div>
