@@ -4,9 +4,15 @@ import { RegisterFormSchema } from "@/app/components/register-form";
 import { db } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 
-export async function RegisterUser(data: RegisterFormSchema) {
+type RegisterStatus =
+  | { status: "success" }
+  | { status: "error"; field: keyof RegisterFormSchema };
+
+export async function RegisterUserAction(
+  data: RegisterFormSchema
+): Promise<RegisterStatus> {
   if (!data.username || !data.email || !data.password) {
-    return "all";
+    throw new Error("Invalid data");
   }
 
   const usernameTest = await db.users.findUnique({
@@ -15,7 +21,7 @@ export async function RegisterUser(data: RegisterFormSchema) {
     },
   });
   if (usernameTest) {
-    return "username";
+    return { status: "error", field: "username" };
   }
 
   const emailTest = await db.users.findUnique({
@@ -24,7 +30,7 @@ export async function RegisterUser(data: RegisterFormSchema) {
     },
   });
   if (emailTest) {
-    return "email";
+    return { status: "error", field: "email" };
   }
 
   const newUser = await db.users.create({
@@ -37,8 +43,8 @@ export async function RegisterUser(data: RegisterFormSchema) {
   });
 
   if (newUser) {
-    return "success";
+    return { status: "success" };
+  } else {
+    throw new Error("Error saving new user in database.");
   }
-
-  return "";
 }

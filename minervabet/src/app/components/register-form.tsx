@@ -7,11 +7,11 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { RegisterUser } from "@/services/registerUser";
+import { RegisterUserAction } from "@/actions/registerUserAction";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -33,17 +33,26 @@ export default function RegisterForm() {
     },
   });
 
-  const [submitStatus, setSubmitStatus] = useState<[string, boolean]>([
-    "",
-    false,
-  ]);
-
   const registerOnSubmit = async (data: RegisterFormSchema) => {
-    const status = await RegisterUser(data);
-    setSubmitStatus(() => {
-      const success = status != "success";
-      return [status, success];
-    });
+    const registerStatus = await RegisterUserAction(data);
+
+    const isError = registerStatus.status != "success";
+    if (isError) {
+      let fieldName = "";
+      switch (registerStatus.field) {
+        case "username":
+          fieldName = "Nome de usuário";
+          break;
+        case "email":
+          fieldName = "Email";
+          break;
+      }
+
+      form.setError(registerStatus.field, {
+        type: "manual",
+        message: `${fieldName} já cadastrado.`,
+      });
+    }
   };
 
   return (
@@ -54,10 +63,6 @@ export default function RegisterForm() {
           onSubmit={form.handleSubmit(registerOnSubmit)}
           className="flex flex-col gap-5 p-5"
         >
-          {submitStatus[1] && submitStatus[0] === "username" ? (
-            <div className="text-red-500">Nome de usuário já cadastrado!</div>
-          ) : null}
-
           <FormField
             control={form.control}
             name="username"
@@ -67,13 +72,10 @@ export default function RegisterForm() {
                 <FormControl>
                   <Input type="text" {...field} className="text-white" />
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />
-
-          {submitStatus[1] && submitStatus[0] === "email" ? (
-            <div className="text-red-500">Email já cadastrado!</div>
-          ) : null}
           <FormField
             control={form.control}
             name="email"
@@ -83,6 +85,7 @@ export default function RegisterForm() {
                 <FormControl>
                   <Input type="email" {...field} className="text-white" />
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -95,6 +98,7 @@ export default function RegisterForm() {
                 <FormControl>
                   <Input type="password" {...field} className="text-white" />
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />
