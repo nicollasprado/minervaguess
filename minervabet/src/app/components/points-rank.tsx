@@ -1,30 +1,41 @@
-import H1 from "../../components/H1";
-import H2 from "../../components/H2";
+"use client";
+
 import ViewerCard from "../components/viewer-card";
+import { useEffect, useState } from "react";
+import { ParsedUser } from "@/interfaces/userInterface";
+import axios from "axios";
 
 export default function PointsRank() {
+  const [rank, setRank] = useState<ParsedUser[]>();
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const usersRank = await axios.get("/api/users/points-rank");
+      setRank(usersRank.data);
+    };
+
+    fetchUsers();
+  }, []);
+
   return (
     <aside className="min-w-[15%] bg-zinc-500 flex flex-col justify-between">
       <div className="border-b-[0.1dvw] border-white py-[1.5dvh]">
-        <H1 className="text-center">VIEWERS COM MAIS PONTOS</H1>
+        <h2 className="text-center text-white font-semibold text-lg">
+          VIEWERS COM MAIS PONTOS
+        </h2>
       </div>
-      <div className="flex flex-col m-auto gap-5">
-        <ViewerCard
-          championName="Ahri"
-          username="nicollasmp"
-          bets={12}
-          points={293871}
-        />
-        <ViewerCard
-          championName="Akali"
-          username="carlos"
-          bets={3}
-          points={920}
-        />
-      </div>
-      <div className="border-t-[0.1dvw] border-white py-[1.5dvh]">
-        <H2 className="text-center">EU:</H2>
-      </div>
+
+      <ol className="flex flex-col m-auto gap-5">
+        {rank?.map((user) => (
+          <li key={user.username}>
+            <ViewerCard
+              username={user.username}
+              bets={user.bets.length}
+              points={user.points}
+            />
+          </li>
+        ))}
+      </ol>
     </aside>
   );
 }

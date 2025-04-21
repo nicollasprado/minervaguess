@@ -3,14 +3,15 @@ import H3 from "../../components/H3";
 import P from "../../components/P";
 
 interface ViewerCardProps {
-  championName: string;
+  iconUrl?: string;
   username: string;
-  points: number;
+  points: string;
   bets: number;
 }
 
 export default function ViewerCard({
-  championName,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  iconUrl,
   username,
   points,
   bets,
@@ -19,8 +20,8 @@ export default function ViewerCard({
     <div className="flex gap-[.5dvw] items-center">
       <div className="relative w-[3.13rem] h-[3.13rem]">
         <Image
-          src={`https://ddragon.leagueoflegends.com/cdn/15.6.1/img/champion/${championName}.png`}
-          alt={`https://ddragon.leagueoflegends.com/cdn/15.6.1/img/champion/${championName}.png`}
+          src={`https://ddragon.leagueoflegends.com/cdn/14.6.1/img/profileicon/29.png`}
+          alt={"Icone helmetbro"}
           fill
           className="object-cover"
         />
