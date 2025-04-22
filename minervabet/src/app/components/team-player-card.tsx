@@ -1,11 +1,11 @@
-import { gameParticipant } from "@/interfaces/gameDataInterface";
+import { GameParticipant } from "@/interfaces/gameDataInterface";
 import { getChampionIcon, getRuneIcon } from "@/utils/fetchDataJsons";
 import Image from "next/image";
 
 const minervaPuuid = process.env.NEXT_PUBLIC_MINERVA_PUUID;
 
 interface TeamPlayerCardProps {
-  participant: gameParticipant;
+  participant: GameParticipant;
 }
 
 export default function TeamPlayerCard({ participant }: TeamPlayerCardProps) {

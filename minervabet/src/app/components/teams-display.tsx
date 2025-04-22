@@ -1,13 +1,13 @@
-import { gameData, gameParticipant } from "@/interfaces/gameDataInterface";
+import { GameData, GameParticipant } from "@/interfaces/gameDataInterface";
 import TeamPlayerCard from "./team-player-card";
 
 const minervaPuuid = process.env.NEXT_PUBLIC_MINERVA_PUUID;
 
-function GetTeams(data: gameData) {
+function GetTeams(data: GameData) {
   const participants = data.participants;
 
-  const minervaTeam: gameParticipant[] = [];
-  const enemyTeam: gameParticipant[] = [];
+  const minervaTeam: GameParticipant[] = [];
+  const enemyTeam: GameParticipant[] = [];
 
   const minerva = participants.find(
     (participant) => participant.puuid === minervaPuuid
@@ -26,7 +26,7 @@ function GetTeams(data: gameData) {
 }
 
 interface TeamsDisplayProps {
-  data: gameData;
+  data: GameData;
 }
 
 export default function TeamsDisplay({ data }: TeamsDisplayProps) {
