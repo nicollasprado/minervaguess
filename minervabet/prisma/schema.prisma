@@ -27,6 +27,10 @@ model Users {
 model Bet {
   id String @id @default(uuid())
   points BigInt
+  killBet String
+  assistBet String
+  deathBet String
+  resultBet Boolean
   result Boolean
   user Users @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
@@ -38,11 +42,14 @@ model Bet {
 model CurrentGameBet {
   id Int @id @default(autoincrement())
   points BigInt
-  result Boolean
   user Users @relation(fields: [userId], references: [id], onDelete: NoAction)
   userId String
   game Game @relation(fields: [gameId], references: [id], onDelete: NoAction)
   gameId String
+  killBet String
+  assistBet String
+  deathBet String
+  resultBet Boolean
   createdAt DateTime @default(now())
 }
 

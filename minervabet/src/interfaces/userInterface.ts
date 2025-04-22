@@ -1,7 +1,11 @@
 export interface Bet {
-  result: boolean;
   id: string;
   points: bigint;
+  result: boolean;
+  resultBet: boolean;
+  killBet: string;
+  deathBet: string;
+  assistBet: string;
   createdAt: Date;
   userId: string;
   gameId: string;
@@ -17,9 +21,13 @@ export interface User {
 }
 
 export interface ParsedBet {
-  result: boolean;
   id: string;
   points: string;
+  result: boolean;
+  resultBet: boolean;
+  killBet: string;
+  deathBet: string;
+  assistBet: string;
   createdAt: Date;
   userId: string;
   gameId: string;
