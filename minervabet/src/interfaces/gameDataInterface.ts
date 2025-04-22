@@ -1,21 +1,21 @@
-export interface gamePerk {
+export interface GamePerk {
   perkStyle: number;
   perkSubStyle: number;
   perkIds: number[];
 }
 
-export interface gameParticipant {
+export interface GameParticipant {
   puuid: string;
   teamId: number;
   riotId: string;
   spell1Id: number;
   spell2Id: number;
   championId: number;
-  perks: gamePerk;
+  perks: GamePerk;
 }
 
-export interface gameData {
+export interface GameData {
   gameId: number;
   gameQueueConfigId: number;
-  participants: gameParticipant[];
+  participants: GameParticipant[];
 }

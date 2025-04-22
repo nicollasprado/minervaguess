@@ -2,7 +2,7 @@
 
 import PointRank from "./components/points-rank";
 import TeamsDisplay from "./components/teams-display";
-import { gameData } from "@/interfaces/gameDataInterface";
+import { GameData } from "@/interfaces/gameDataInterface";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import Header from "./components/header";
@@ -10,7 +10,7 @@ import BetForm from "./components/bet-form";
 import { useSession } from "next-auth/react";
 
 const GetGameData = async () => {
-  const response = await axios.get<gameData>("/api/match");
+  const response = await axios.get<GameData>("/api/match");
   return response.data;
 };
 
@@ -27,7 +27,7 @@ export default function Home() {
     return (
       <div className="flex w-screen h-[100dvh]">
         <PointRank />
-        <main className="min-w-[70dvw] bg-zinc-800 flex flex-col">
+        <main className="min-w-[70dvw] bg-zinc-800 flex flex-col gap-50">
           <Header username={username} />
 
           <h2 className="text-gray-400 text-center font-bold text-3xl">
@@ -43,7 +43,7 @@ export default function Home() {
     return (
       <div className="flex w-screen h-[100dvh]">
         <PointRank />
-        <main className="min-w-[70dvw] bg-zinc-800 flex flex-col">
+        <main className="min-w-[70dvw] bg-zinc-800 flex flex-col gap-50">
           <Header username={username} />
 
           <h2 className="text-red-400 text-center font-bold text-3xl">
