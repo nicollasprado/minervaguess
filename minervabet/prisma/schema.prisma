@@ -20,6 +20,7 @@ model Users {
   password String
   points BigInt
   bets Bet[]
+  currentGameBet CurrentGameBet[]
   createdAt DateTime @default(now())
 }
 
@@ -34,8 +35,18 @@ model Bet {
   createdAt DateTime @default(now())
 }
 
+model CurrentGameBet {
+  id Int @id @default(autoincrement())
+  points BigInt
+  result Boolean
+  user Users @relation(fields: [userId], references: [id], onDelete: NoAction)
+  userId String
+  game Game @relation(fields: [gameId], references: [id], onDelete: NoAction)
+  gameId String
+  createdAt DateTime @default(now())
+}
+
 model Game {
-  @@map("game")
   id String @id
   firstKill Boolean
   firstTower Boolean
@@ -45,6 +56,7 @@ model Game {
   qtGrubs Int
   result Boolean
   bets Bet[]
+  currentGameBet CurrentGameBet[]
   participants GameParticipant[]
   minervaGame MinervaGame?
   createdAt DateTime @default(now())
