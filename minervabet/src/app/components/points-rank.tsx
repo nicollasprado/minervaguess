@@ -10,7 +10,7 @@ export default function PointsRank() {
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const usersRank = await axios.get("/api/users/points-rank");
+      const usersRank = await axios.get("/api/user/points-rank");
       setRank(usersRank.data);
     };
 
