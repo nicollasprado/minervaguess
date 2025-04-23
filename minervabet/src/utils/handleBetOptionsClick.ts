@@ -23,7 +23,7 @@ export function handleCheckKills(
   }
 
   const currentValue = form.getValues(fieldId);
-  form.setValue(fieldId, Number(currentValue));
+  form.setValue(fieldId, currentValue);
 
   if (currentValue === false || currentValue === "") {
     multiplier = 0;
@@ -61,7 +61,7 @@ export function handleCheckDeaths(
   }
 
   const currentValue = form.getValues(fieldId);
-  form.setValue(fieldId, Number(currentValue));
+  form.setValue(fieldId, currentValue);
 
   if (currentValue === false || currentValue === "") {
     multiplier = 0;
@@ -98,7 +98,7 @@ export function handleCheckAssists(
   }
 
   const currentValue = form.getValues(fieldId);
-  form.setValue(fieldId, Number(currentValue));
+  form.setValue(fieldId, currentValue);
 
   if (currentValue === false || currentValue === "") {
     multiplier = 0;
@@ -129,7 +129,7 @@ export function handleCheckResult(
   }
 
   const currentValue = form.getValues(fieldId);
-  form.setValue(fieldId, Number(currentValue));
+  form.setValue(fieldId, currentValue);
 
   if (currentValue === false) {
     multiplier = 0;

@@ -83,7 +83,7 @@ export default function Home() {
 
         <TeamsDisplay data={gameData} />
 
-        <BetForm />
+        <BetForm user={user} game={gameData} />
       </main>
       <PointRank />
     </div>

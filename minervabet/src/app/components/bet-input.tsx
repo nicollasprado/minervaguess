@@ -8,7 +8,7 @@ import {
 import { HTMLInputTypeAttribute } from "react";
 import { Controller, UseFormReturn } from "react-hook-form";
 
-interface BetGroupProps {
+interface BetInputProps {
   description: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   form: UseFormReturn<any>;
@@ -17,13 +17,13 @@ interface BetGroupProps {
   onChangeFunc: () => void;
 }
 
-export default function BetGroup({
+export default function BetInput({
   description,
   form,
   name,
   inputType,
   onChangeFunc,
-}: BetGroupProps) {
+}: BetInputProps) {
   return (
     <FormField
       control={form.control}

@@ -1,6 +1,6 @@
 "use client";
 
-import BetGroup from "./bet-group";
+import BetInput from "./bet-input";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -21,6 +21,10 @@ import {
   handleCheckKills,
   handleCheckResult,
 } from "@/utils/handleBetOptionsClick";
+import P from "@/components/P";
+import { User } from "@/interfaces/userInterface";
+import { GameData } from "@/interfaces/gameDataInterface";
+import { BetData, saveCurrentGameBet } from "@/services/currentGameBetService";
 
 const formSchema = z.object({
   killHigh: z.boolean().optional(),
@@ -53,7 +57,12 @@ const formSchema = z.object({
 
 export type BetFormSchema = z.infer<typeof formSchema>;
 
-export default function BetForm() {
+interface BetFormProps {
+  user?: User;
+  game?: GameData;
+}
+
+export default function BetForm({ user, game }: BetFormProps) {
   const [multipliers, setMultipliers] = useState<[string, number][]>([
     ["kill", 0],
     ["assist", 0],
@@ -75,13 +84,9 @@ export default function BetForm() {
       deathSpecific: "",
       win: false,
       lose: false,
-      points: 0,
+      points: 1,
     },
   });
-
-  const onSubmit = (data: BetFormSchema) => {
-    console.log(data);
-  };
 
   const getTotalMultipliers = () => {
     let tot = 0;
@@ -92,8 +97,58 @@ export default function BetForm() {
     return tot;
   };
 
+  const onSubmit = async (data: BetFormSchema) => {
+    if (!user) {
+      form.setError("root", { message: "Conecte-se para criar uma aposta." });
+      return;
+    }
+
+    if (getTotalMultipliers() === 0) {
+      form.setError("root", {
+        message:
+          "Selecione pelo menos uma opção acima pra realizar uma aposta.",
+      });
+      return;
+    }
+
+    if (user.points < BigInt(data.points)) {
+      form.setError("root", {
+        message: "Pontos insuficientes para criar essa aposta.",
+      });
+      return;
+    }
+
+    const finalData: BetData = {
+      assistHigh: data.assistHigh!,
+      assistLow: data.assistLow!,
+      assistSpecific: data.assistSpecific!,
+      deathHigh: data.deathHigh!,
+      deathLow: data.deathLow!,
+      deathSpecific: data.deathSpecific!,
+      killHigh: data.killHigh!,
+      killLow: data.killLow!,
+      killSpecific: data.killSpecific!,
+      lose: data.lose!,
+      win: data.win!,
+      points: data.points,
+      totalMultipliers: getTotalMultipliers(),
+    };
+
+    try {
+      await saveCurrentGameBet(user, game!, finalData);
+      window.alert("Aposta criada com sucesso!");
+      window.location.reload();
+    } catch (e) {
+      console.error("Error creating bet: ", e);
+      form.setError("root", {
+        message:
+          "Desculpa, ocorreu um erro ao criar sua aposta, tente novamente.",
+      });
+    }
+  };
+
   return (
-    <section className="bg-purple-700 m-5 p-5 h-[50%] max-h-[70%]">
+    <section className="bg-purple-700 m-5 p-5 h-[50%] max-h-[80%]">
       <h2 className="text-neutral-300 text-center font-bold text-3xl ">
         APOSTAR
       </h2>
@@ -108,7 +163,7 @@ export default function BetForm() {
             <li className="flex flex-col gap-2">
               <H2 className="text-left">Abates</H2>
               <ol className="flex flex-col gap-2 items-start">
-                <BetGroup
+                <BetInput
                   description="Acima de 8 - 1.5x"
                   form={form}
                   name="killHigh"
@@ -117,7 +172,7 @@ export default function BetForm() {
                     handleCheckKills("killHigh", form, setMultipliers)
                   }
                 />
-                <BetGroup
+                <BetInput
                   description="Abaixo de 8 - 1.3x"
                   form={form}
                   name="killLow"
@@ -126,7 +181,7 @@ export default function BetForm() {
                     handleCheckKills("killLow", form, setMultipliers)
                   }
                 />
-                <BetGroup
+                <BetInput
                   description="Valor extato - 2x"
                   form={form}
                   name="killSpecific"
@@ -142,7 +197,7 @@ export default function BetForm() {
               <H2 className="text-left">Assistências</H2>
               <ol className="flex flex-col gap-2 items-start">
                 <li>
-                  <BetGroup
+                  <BetInput
                     description="Acima de 10 - 1.4x"
                     form={form}
                     name="assistHigh"
@@ -153,7 +208,7 @@ export default function BetForm() {
                   />
                 </li>
                 <li>
-                  <BetGroup
+                  <BetInput
                     description="Abaixo de 10 - 1.3x"
                     form={form}
                     name="assistLow"
@@ -164,7 +219,7 @@ export default function BetForm() {
                   />
                 </li>
                 <li>
-                  <BetGroup
+                  <BetInput
                     description="Valor extato - 2x"
                     form={form}
                     name="assistSpecific"
@@ -181,7 +236,7 @@ export default function BetForm() {
               <H2 className="text-left">Mortes</H2>
               <ol className="flex flex-col gap-2 items-start">
                 <li>
-                  <BetGroup
+                  <BetInput
                     description="Acima de 5 - 1.4x"
                     form={form}
                     name="deathHigh"
@@ -192,7 +247,7 @@ export default function BetForm() {
                   />
                 </li>
                 <li>
-                  <BetGroup
+                  <BetInput
                     description="Abaixo de 5 - 1.6x"
                     form={form}
                     name="deathLow"
@@ -203,7 +258,7 @@ export default function BetForm() {
                   />
                 </li>
                 <li>
-                  <BetGroup
+                  <BetInput
                     description="Valor extato - 2x"
                     form={form}
                     name="deathSpecific"
@@ -220,7 +275,7 @@ export default function BetForm() {
               <H2 className="text-left">Resultado final</H2>
               <ol className="flex flex-col gap-2 items-start">
                 <li>
-                  <BetGroup
+                  <BetInput
                     description="Vitória - 2x"
                     form={form}
                     name="win"
@@ -231,7 +286,7 @@ export default function BetForm() {
                   />
                 </li>
                 <li>
-                  <BetGroup
+                  <BetInput
                     description="Derrota - 2x"
                     form={form}
                     name="lose"
@@ -244,6 +299,12 @@ export default function BetForm() {
               </ol>
             </li>
           </ul>
+
+          {form.formState.errors.root && (
+            <P className="text-center text-red-500 text-xl">
+              {form.formState.errors.root.message}
+            </P>
+          )}
 
           <div className="flex justify-center">
             <div className="flex flex-col gap-3">
@@ -273,9 +334,15 @@ export default function BetForm() {
                 </p>
               </div>
 
-              <Button className="bg-green-500 text-black text-xl text-bold w-60 h-15">
-                APOSTAR
-              </Button>
+              {user ? (
+                <Button className="bg-green-500 hover:bg-green-600 text-black text-xl text-bold w-60 h-15 cursor-pointer">
+                  APOSTAR
+                </Button>
+              ) : (
+                <Button className="bg-green-500 hover:bg-red-500 text-black text-xl text-bold w-60 h-15 cursor-not-allowed">
+                  APOSTAR
+                </Button>
+              )}
             </div>
           </div>
         </form>
