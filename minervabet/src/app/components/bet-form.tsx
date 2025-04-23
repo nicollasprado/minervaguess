@@ -25,6 +25,7 @@ import P from "@/components/P";
 import { User } from "@/interfaces/userInterface";
 import { GameData } from "@/interfaces/gameDataInterface";
 import { BetData, saveCurrentGameBet } from "@/app/actions/createBetAction";
+import { BetProperties } from "@/interfaces/betProperties";
 
 const formSchema = z.object({
   killHigh: z.boolean().optional(),
@@ -164,7 +165,7 @@ export default function BetForm({ user, game }: BetFormProps) {
               <H2 className="text-left">Abates</H2>
               <ol className="flex flex-col gap-2 items-start">
                 <BetInput
-                  description="Acima de 8 - 1.5x"
+                  description={`Acima de ${BetProperties.kills.average} - ${BetProperties.kills.highMultiplier}x`}
                   form={form}
                   name="killHigh"
                   inputType="checkbox"
@@ -173,7 +174,7 @@ export default function BetForm({ user, game }: BetFormProps) {
                   }
                 />
                 <BetInput
-                  description="Abaixo de 8 - 1.3x"
+                  description={`Acima de ${BetProperties.kills.average} - ${BetProperties.kills.lowMultiplier}x`}
                   form={form}
                   name="killLow"
                   inputType="checkbox"
@@ -182,7 +183,7 @@ export default function BetForm({ user, game }: BetFormProps) {
                   }
                 />
                 <BetInput
-                  description="Valor extato - 2x"
+                  description={`Valor extato - ${BetProperties.exactMultiplier}x`}
                   form={form}
                   name="killSpecific"
                   inputType="text"
@@ -198,7 +199,7 @@ export default function BetForm({ user, game }: BetFormProps) {
               <ol className="flex flex-col gap-2 items-start">
                 <li>
                   <BetInput
-                    description="Acima de 10 - 1.4x"
+                    description={`Acima de ${BetProperties.assists.average} - ${BetProperties.assists.highMultiplier}x`}
                     form={form}
                     name="assistHigh"
                     inputType="checkbox"
@@ -209,7 +210,7 @@ export default function BetForm({ user, game }: BetFormProps) {
                 </li>
                 <li>
                   <BetInput
-                    description="Abaixo de 10 - 1.3x"
+                    description={`Acima de ${BetProperties.assists.average} - ${BetProperties.assists.lowMultiplier}x`}
                     form={form}
                     name="assistLow"
                     inputType="checkbox"
@@ -220,7 +221,7 @@ export default function BetForm({ user, game }: BetFormProps) {
                 </li>
                 <li>
                   <BetInput
-                    description="Valor extato - 2x"
+                    description={`Valor extato - ${BetProperties.exactMultiplier}x`}
                     form={form}
                     name="assistSpecific"
                     inputType="text"
@@ -237,7 +238,7 @@ export default function BetForm({ user, game }: BetFormProps) {
               <ol className="flex flex-col gap-2 items-start">
                 <li>
                   <BetInput
-                    description="Acima de 5 - 1.4x"
+                    description={`Acima de ${BetProperties.deaths.average} - ${BetProperties.deaths.highMultiplier}x`}
                     form={form}
                     name="deathHigh"
                     inputType="checkbox"
@@ -248,7 +249,7 @@ export default function BetForm({ user, game }: BetFormProps) {
                 </li>
                 <li>
                   <BetInput
-                    description="Abaixo de 5 - 1.6x"
+                    description={`Acima de ${BetProperties.deaths.average} - ${BetProperties.deaths.lowMultiplier}x`}
                     form={form}
                     name="deathLow"
                     inputType="checkbox"
@@ -259,7 +260,7 @@ export default function BetForm({ user, game }: BetFormProps) {
                 </li>
                 <li>
                   <BetInput
-                    description="Valor extato - 2x"
+                    description={`Valor extato - ${BetProperties.exactMultiplier}x`}
                     form={form}
                     name="deathSpecific"
                     inputType="text"
@@ -276,7 +277,7 @@ export default function BetForm({ user, game }: BetFormProps) {
               <ol className="flex flex-col gap-2 items-start">
                 <li>
                   <BetInput
-                    description="Vitória - 2x"
+                    description={`Vitória - ${BetProperties.exactMultiplier}x`}
                     form={form}
                     name="win"
                     inputType="checkbox"
@@ -287,7 +288,7 @@ export default function BetForm({ user, game }: BetFormProps) {
                 </li>
                 <li>
                   <BetInput
-                    description="Derrota - 2x"
+                    description={`Derrota - ${BetProperties.exactMultiplier}x`}
                     form={form}
                     name="lose"
                     inputType="checkbox"

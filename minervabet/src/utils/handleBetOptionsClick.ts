@@ -1,3 +1,4 @@
+import { BetProperties } from "@/interfaces/betProperties";
 import { Dispatch, SetStateAction } from "react";
 import { UseFormReturn } from "react-hook-form";
 
@@ -11,15 +12,15 @@ export function handleCheckKills(
   if (fieldId === "killHigh") {
     form.setValue("killLow", false);
     form.setValue("killSpecific", "");
-    multiplier = 1.5;
+    multiplier = BetProperties.kills.highMultiplier;
   } else if (fieldId === "killLow") {
     form.setValue("killHigh", false);
     form.setValue("killSpecific", "");
-    multiplier = 1.3;
+    multiplier = BetProperties.kills.lowMultiplier;
   } else if (fieldId === "killSpecific") {
     form.setValue("killHigh", false);
     form.setValue("killLow", false);
-    multiplier = 2;
+    multiplier = BetProperties.exactMultiplier;
   }
 
   const currentValue = form.getValues(fieldId);
@@ -49,15 +50,15 @@ export function handleCheckDeaths(
   if (fieldId === "deathHigh") {
     form.setValue("deathLow", false);
     form.setValue("deathSpecific", "");
-    multiplier = 1.4;
+    multiplier = BetProperties.deaths.highMultiplier;
   } else if (fieldId === "deathLow") {
     form.setValue("deathHigh", false);
     form.setValue("deathSpecific", "");
-    multiplier = 1.6;
+    multiplier = BetProperties.deaths.lowMultiplier;
   } else if (fieldId === "deathSpecific") {
     form.setValue("deathHigh", false);
     form.setValue("deathLow", false);
-    multiplier = 2;
+    multiplier = BetProperties.exactMultiplier;
   }
 
   const currentValue = form.getValues(fieldId);
@@ -86,15 +87,15 @@ export function handleCheckAssists(
   if (fieldId === "assistHigh") {
     form.setValue("assistLow", false);
     form.setValue("assistSpecific", "");
-    multiplier = 1.4;
+    multiplier = BetProperties.assists.highMultiplier;
   } else if (fieldId === "assistLow") {
     form.setValue("assistHigh", false);
     form.setValue("assistSpecific", "");
-    multiplier = 1.3;
+    multiplier = BetProperties.assists.lowMultiplier;
   } else if (fieldId === "assistSpecific") {
     form.setValue("assistHigh", false);
     form.setValue("assistLow", false);
-    multiplier = 2;
+    multiplier = BetProperties.exactMultiplier;
   }
 
   const currentValue = form.getValues(fieldId);
@@ -122,10 +123,10 @@ export function handleCheckResult(
   let multiplier = 0;
   if (fieldId === "win") {
     form.setValue("lose", false);
-    multiplier = 2;
+    multiplier = BetProperties.exactMultiplier;
   } else if (fieldId === "lose") {
     form.setValue("win", false);
-    multiplier = 2;
+    multiplier = BetProperties.exactMultiplier;
   }
 
   const currentValue = form.getValues(fieldId);
