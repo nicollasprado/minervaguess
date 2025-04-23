@@ -174,7 +174,7 @@ export default function BetForm({ user, game }: BetFormProps) {
                   }
                 />
                 <BetInput
-                  description={`Acima de ${BetProperties.kills.average} - ${BetProperties.kills.lowMultiplier}x`}
+                  description={`Abaixo de ${BetProperties.kills.average} - ${BetProperties.kills.lowMultiplier}x`}
                   form={form}
                   name="killLow"
                   inputType="checkbox"
@@ -210,7 +210,7 @@ export default function BetForm({ user, game }: BetFormProps) {
                 </li>
                 <li>
                   <BetInput
-                    description={`Acima de ${BetProperties.assists.average} - ${BetProperties.assists.lowMultiplier}x`}
+                    description={`Abaixo de ${BetProperties.assists.average} - ${BetProperties.assists.lowMultiplier}x`}
                     form={form}
                     name="assistLow"
                     inputType="checkbox"
@@ -249,7 +249,7 @@ export default function BetForm({ user, game }: BetFormProps) {
                 </li>
                 <li>
                   <BetInput
-                    description={`Acima de ${BetProperties.deaths.average} - ${BetProperties.deaths.lowMultiplier}x`}
+                    description={`Abaixo de ${BetProperties.deaths.average} - ${BetProperties.deaths.lowMultiplier}x`}
                     form={form}
                     name="deathLow"
                     inputType="checkbox"

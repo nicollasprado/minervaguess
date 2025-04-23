@@ -21,7 +21,7 @@ export async function fetchLeagueRunningMatch() {
 }
 
 export async function fetchLeagueFinishedMatch(matchId: string) {
-  const apiUrl = `https://br1.api.riotgames.com/lol/match/v5/matches/BR1_${matchId}`;
+  const apiUrl = `https://americas.api.riotgames.com/lol/match/v5/matches/BR1_${matchId}`;
 
   try {
     const response = await axios.get<FinishedGameData>(apiUrl, {

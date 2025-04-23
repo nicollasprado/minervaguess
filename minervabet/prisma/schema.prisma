@@ -26,7 +26,10 @@ model Users {
 
 model Bet {
   id String @id @default(uuid())
-  points Float
+  betPoints Int
+  receivedPoints Int
+  pastUserPoints Int
+  newUserPoints Int
   killBet String
   assistBet String
   deathBet String
@@ -41,7 +44,7 @@ model Bet {
 
 model CurrentGameBet {
   id Int @id @default(autoincrement())
-  points Float
+  points Int
   user Users @relation(fields: [userId], references: [id], onDelete: NoAction)
   userId String
   gameId String

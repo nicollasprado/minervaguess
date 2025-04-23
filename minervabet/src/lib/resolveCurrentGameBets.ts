@@ -9,7 +9,7 @@ const MINERVA_PUUID = process.env.NEXT_PUBLIC_MINERVA_PUUID;
 export default async function resolveCurrentGameBets() {
   const bets = await db.currentGameBet.findMany();
 
-  if (!bets) {
+  if (bets.length === 0) {
     return;
   }
 
@@ -41,11 +41,16 @@ export default async function resolveCurrentGameBets() {
         newUserPoints = 100;
       }
 
+      const receivedPoints = tempBet.points * tempBet.totalMultipliers;
+
       let error = false;
       try {
         await db.bet.create({
           data: {
-            points: newUserPoints,
+            betPoints: tempBet.points,
+            receivedPoints: receivedPoints,
+            pastUserPoints: user!.points,
+            newUserPoints: newUserPoints,
             killBet: tempBet.killBet,
             assistBet: tempBet.assistBet,
             deathBet: tempBet.deathBet,

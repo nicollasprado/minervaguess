@@ -19,7 +19,10 @@ export const BetProperties = {
 
 export interface Bet {
   id: string;
-  points: number;
+  betPoints: number;
+  receivedPoints: number;
+  pastUserPoints: number;
+  newUserPoints: number;
   result: boolean;
   resultBet: string;
   killBet: string;
