@@ -24,7 +24,7 @@ import {
 import P from "@/components/P";
 import { User } from "@/interfaces/userInterface";
 import { GameData } from "@/interfaces/gameDataInterface";
-import { BetData, saveCurrentGameBet } from "@/services/currentGameBetService";
+import { BetData, saveCurrentGameBet } from "@/app/actions/createBetAction";
 
 const formSchema = z.object({
   killHigh: z.boolean().optional(),

@@ -2,7 +2,7 @@ export interface Bet {
   id: string;
   points: bigint;
   result: boolean;
-  resultBet: boolean;
+  resultBet: string;
   killBet: string;
   deathBet: string;
   assistBet: string;
