@@ -35,7 +35,6 @@ model Bet {
   totalMultipliers Float
   user Users @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
-  game Game @relation(fields: [gameId], references: [id], onDelete: Cascade)
   gameId String
   createdAt DateTime @default(now())
 }
@@ -54,38 +53,7 @@ model CurrentGameBet {
   createdAt DateTime @default(now())
 }
 
-model Game {
-  id String @id
-  firstKill Boolean
-  firstTower Boolean
-  firstDragon Boolean
-  atakhanKill Boolean
-  dragonSoul Boolean
-  qtGrubs Int
-  result Boolean
-  bets Bet[]
-  participants GameParticipant[]
-  minervaGame MinervaGame?
-  createdAt DateTime @default(now())
-}
-
-model GameParticipant {
-  puuid String @id
-  username String
-  tagline String
-  championName String
-  primaryRune RunePath
-  secondaryRune RunePath
-  team GameTeam
-  lane String
-  spellD Spell
-  spellF Spell
-  game Game @relation(fields: [gameId], references: [id], onDelete: Cascade)
-  gameId String
-}
-
 model MinervaGame {
-  game Game @relation(fields: [gameId], references: [id], onDelete: Cascade)
   gameId String @id
   championName String
   kills Int
@@ -93,33 +61,6 @@ model MinervaGame {
   assists Int
   kda Float
   highestKillStreak KillStreak
-}
-
-
-
-enum RunePath {
-  PRECISION
-  DOMINATION
-  SORCERY
-  RESOLVE
-  INSPIRATION
-}
-
-enum GameTeam {
-  MINERVA
-  ENEMY
-}
-
-enum Spell {
-  HEAL
-  GHOST
-  BARRIER
-  EXHAUST
-  FLASH
-  TELEPORT
-  SMITE
-  CLEANSE
-  IGNITE
 }
 
 enum KillStreak {
