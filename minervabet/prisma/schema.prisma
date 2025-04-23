@@ -30,8 +30,9 @@ model Bet {
   killBet String
   assistBet String
   deathBet String
-  resultBet Boolean
+  resultBet String
   result Boolean
+  totalMultipliers Float
   user Users @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
   game Game @relation(fields: [gameId], references: [id], onDelete: Cascade)
@@ -44,12 +45,12 @@ model CurrentGameBet {
   points BigInt
   user Users @relation(fields: [userId], references: [id], onDelete: NoAction)
   userId String
-  game Game @relation(fields: [gameId], references: [id], onDelete: NoAction)
   gameId String
   killBet String
   assistBet String
   deathBet String
-  resultBet Boolean
+  resultBet String
+  totalMultipliers Float
   createdAt DateTime @default(now())
 }
 
@@ -63,7 +64,6 @@ model Game {
   qtGrubs Int
   result Boolean
   bets Bet[]
-  currentGameBet CurrentGameBet[]
   participants GameParticipant[]
   minervaGame MinervaGame?
   createdAt DateTime @default(now())
