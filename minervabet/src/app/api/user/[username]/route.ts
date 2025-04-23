@@ -14,6 +14,8 @@ export async function GET(
       username: user.username,
       email: user.email,
       points: user.points.toString(),
+      bets: user.bets,
+      currentGameBets: user.currentGameBets,
       createdAt: user.createdAt,
     };
 

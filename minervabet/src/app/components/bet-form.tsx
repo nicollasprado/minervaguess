@@ -331,7 +331,7 @@ export default function BetForm({ user, game }: BetFormProps) {
                 />
 
                 <p className="font-bold text-green-400">
-                  {getTotalMultipliers()}x
+                  {getTotalMultipliers().toFixed(1)}x
                 </p>
               </div>
 

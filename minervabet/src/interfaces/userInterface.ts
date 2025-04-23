@@ -1,4 +1,4 @@
-import { Bet } from "./betInterface";
+import { Bet, CurrentGameBet } from "./betInterface";
 
 export interface User {
   id: string;
@@ -6,6 +6,7 @@ export interface User {
   email: string;
   points: number;
   bets: Bet[];
+  currentGameBets: CurrentGameBet[];
   createdAt: Date;
 }
 

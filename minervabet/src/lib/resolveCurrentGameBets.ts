@@ -41,7 +41,9 @@ export default async function resolveCurrentGameBets() {
         newUserPoints = 100;
       }
 
-      const receivedPoints = tempBet.points * tempBet.totalMultipliers;
+      const receivedPoints = betResult
+        ? tempBet.points * tempBet.totalMultipliers
+        : tempBet.points;
 
       let error = false;
       try {
@@ -139,6 +141,12 @@ function checkIfWinBet(
     data.deathBet !== "LOW"
   ) {
     return Number(data.deathBet) === deaths;
+  }
+
+  if (data.resultBet === "WIN" && !minervaData.win) {
+    return false;
+  } else if (data.resultBet === "LOSE" && minervaData.win) {
+    return false;
   }
 
   return true;

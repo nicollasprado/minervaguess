@@ -20,7 +20,7 @@ model Users {
   password String
   points Float
   bets Bet[]
-  currentGameBet CurrentGameBet[]
+  currentGameBets CurrentGameBet[]
   createdAt DateTime @default(now())
 }
 

@@ -10,6 +10,7 @@ import BetForm from "./components/bet-form";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { User } from "@/interfaces/userInterface";
+import PastBets from "./components/past-bets";
 
 const GetGameData = async () => {
   const response = await axios.get<GameData>("/api/match");
@@ -54,7 +55,7 @@ export default function Home() {
             Obtendo dados da partida...
           </h2>
         </main>
-        <PointRank />
+        <PastBets user={user} />
       </div>
     );
   }
@@ -70,7 +71,7 @@ export default function Home() {
             Partida não encontrada
           </h2>
         </main>
-        <PointRank />
+        <PastBets user={user} />
       </div>
     );
   }
@@ -85,7 +86,7 @@ export default function Home() {
 
         <BetForm user={user} game={gameData} />
       </main>
-      <PointRank />
+      <PastBets user={user} />
     </div>
   );
 }

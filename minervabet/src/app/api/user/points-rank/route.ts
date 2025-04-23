@@ -7,11 +7,7 @@ export async function GET() {
 
   const parsedRankUsers = rank.map((user) => ({
     ...user,
-    points: user.points.toString(),
-    bets: user.bets.map((bet) => ({
-      ...bet,
-      points: bet.points.toString(),
-    })),
+    points: user.points,
   }));
 
   if (rank) {

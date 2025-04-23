@@ -34,12 +34,13 @@ export interface Bet {
 }
 
 export interface CurrentGameBet {
-  id: string;
+  id: number;
   points: number;
   resultBet: string;
   killBet: string;
   deathBet: string;
   assistBet: string;
+  totalMultipliers: number;
   createdAt: Date;
   userId: string;
   gameId: string;
