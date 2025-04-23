@@ -9,14 +9,14 @@ export async function getCurrentMatch(): Promise<GameData | null> {
       return null;
     }
 
-    const rawCachedData = await redis.get("current-match");
-    if (rawCachedData) {
-      return JSON.parse(rawCachedData as string);
+    const cachedData: GameData | null = await redis.get("current-match");
+    if (cachedData) {
+      return cachedData;
     }
 
     const data = await fetchLeagueMatch();
     if (!data) {
-      await redis.set("current-match-status", "ended", { ex: 120 });
+      await redis.set("current-match-status", "ended", { ex: 60 });
       return null;
     }
 
