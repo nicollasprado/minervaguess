@@ -18,7 +18,7 @@ model Users {
   username String @unique
   email String @unique
   password String
-  points BigInt
+  points Float
   bets Bet[]
   currentGameBet CurrentGameBet[]
   createdAt DateTime @default(now())
@@ -26,7 +26,7 @@ model Users {
 
 model Bet {
   id String @id @default(uuid())
-  points BigInt
+  points Float
   killBet String
   assistBet String
   deathBet String
@@ -41,7 +41,7 @@ model Bet {
 
 model CurrentGameBet {
   id Int @id @default(autoincrement())
-  points BigInt
+  points Float
   user Users @relation(fields: [userId], references: [id], onDelete: NoAction)
   userId String
   gameId String

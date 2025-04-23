@@ -112,7 +112,7 @@ export default function BetForm({ user, game }: BetFormProps) {
       return;
     }
 
-    if (user.points < BigInt(data.points)) {
+    if (user.points < data.points) {
       form.setError("root", {
         message: "Pontos insuficientes para criar essa aposta.",
       });

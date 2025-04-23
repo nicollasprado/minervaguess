@@ -65,7 +65,7 @@ export async function saveCurrentGameBet(
     },
   });
 
-  const newPoints = dbUser!.points - BigInt(betData.points);
+  const newPoints = dbUser!.points - betData.points;
   if (newPoints < 0) {
     throw new Error(
       "Error, user dont have required points to create this bet."
@@ -83,7 +83,7 @@ export async function saveCurrentGameBet(
 
   await db.currentGameBet.create({
     data: {
-      points: BigInt(betData.points),
+      points: betData.points,
       assistBet: assistBet,
       deathBet: deathBet,
       killBet: killBet,

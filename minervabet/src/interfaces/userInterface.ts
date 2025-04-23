@@ -1,6 +1,6 @@
 export interface Bet {
   id: string;
-  points: bigint;
+  points: number;
   result: boolean;
   resultBet: string;
   killBet: string;
@@ -15,7 +15,7 @@ export interface User {
   id: string;
   username: string;
   email: string;
-  points: bigint;
+  points: number;
   bets: Bet[];
   createdAt: Date;
 }
