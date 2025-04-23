@@ -19,3 +19,23 @@ export interface GameData {
   gameQueueConfigId: number;
   participants: GameParticipant[];
 }
+
+export interface FinishedGameParticipant {
+  puuid: string;
+  teamId: number;
+  kills: number;
+  assists: number;
+  deaths: number;
+  win: boolean;
+  largestMultiKill: number;
+  firstBloodKill: boolean;
+  challenges: {
+    kda: number;
+  };
+}
+
+export interface FinishedGameData {
+  info: {
+    participants: FinishedGameParticipant[];
+  };
+}

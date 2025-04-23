@@ -1,4 +1,4 @@
-import { BetProperties } from "@/interfaces/betProperties";
+import { BetProperties } from "@/interfaces/betInterface";
 import { Dispatch, SetStateAction } from "react";
 import { UseFormReturn } from "react-hook-form";
 

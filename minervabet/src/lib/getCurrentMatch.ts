@@ -1,6 +1,7 @@
 import { GameData } from "@/interfaces/gameDataInterface";
-import { fetchLeagueMatch } from "./fetchLeagueMatch";
+import { fetchLeagueRunningMatch } from "./fetchLeagueMatch";
 import { redis } from "./redis";
+import resolveCurrentGameBets from "./resolveCurrentGameBets";
 
 export async function getCurrentMatch(): Promise<GameData | null> {
   try {
@@ -14,9 +15,10 @@ export async function getCurrentMatch(): Promise<GameData | null> {
       return cachedData;
     }
 
-    const data = await fetchLeagueMatch();
+    const data = await fetchLeagueRunningMatch();
     if (!data) {
       await redis.set("current-match-status", "ended", { ex: 60 });
+      await resolveCurrentGameBets();
       return null;
     }
 

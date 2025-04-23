@@ -1,15 +1,4 @@
-export interface Bet {
-  id: string;
-  points: number;
-  result: boolean;
-  resultBet: string;
-  killBet: string;
-  deathBet: string;
-  assistBet: string;
-  createdAt: Date;
-  userId: string;
-  gameId: string;
-}
+import { Bet } from "./betInterface";
 
 export interface User {
   id: string;
