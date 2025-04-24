@@ -1,4 +1,5 @@
 import { Bet } from "@/interfaces/betInterface";
+import copyToClipboard from "@/utils/copyToClipboard";
 import getBetsDescriptions from "@/utils/getBetsDescriptions";
 import {
   Accordion,
@@ -94,10 +95,16 @@ export default function PastBetCard({ bet }: PastBetCardProps) {
       </Accordion>
 
       <div>
-        <p className="text-[0.7rem] truncate w-[100%] text-muted-foreground">
+        <p
+          className="text-[0.7rem] truncate w-[100%] text-muted-foreground cursor-copy"
+          onClick={() => copyToClipboard(bet.id)}
+        >
           ID: {bet.id}
         </p>
-        <p className="text-[0.7rem] truncate w-[100%] text-muted-foreground">
+        <p
+          className="text-[0.7rem] truncate w-[100%] text-muted-foreground cursor-copy"
+          onClick={() => copyToClipboard(bet.gameId)}
+        >
           MatchId: {bet.gameId}
         </p>
       </div>
