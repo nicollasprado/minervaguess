@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { User } from "@/interfaces/userInterface";
 import PastBets from "./components/past-bets";
 import getUser from "./actions/users/getUser";
+import { GithubIcon } from "lucide-react";
 
 const GetGameData = async () => {
   const response = await axios.get<GameData>("/api/match");
@@ -87,6 +88,17 @@ export default function Home() {
         <TeamsDisplay data={gameData} />
 
         <BetForm user={user} game={gameData} />
+
+        <footer>
+          <a
+            href="https://github.com/nicollasprado"
+            target="_blank"
+            className="flex justify-center items-center gap-2 cursor-pointer text-sm text-muted-foreground"
+          >
+            <GithubIcon />
+            <p>made by Nicollas Prado</p>
+          </a>
+        </footer>
       </main>
       <PastBets userId={user ? user.id : ""} />
     </div>
