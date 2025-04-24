@@ -11,6 +11,7 @@ interface ConfiguredPaginationProps {
   totalPagesQt: number;
   handlePrevPageClick: () => void;
   handleNextPageClick: () => void;
+  handleSpecificPageClick: (page: number) => void;
 }
 
 export default function ConfiguredPagination({
@@ -18,6 +19,7 @@ export default function ConfiguredPagination({
   totalPagesQt,
   handleNextPageClick,
   handlePrevPageClick,
+  handleSpecificPageClick,
 }: ConfiguredPaginationProps) {
   return (
     <Pagination className="text-white w-full mb-2">
@@ -33,7 +35,10 @@ export default function ConfiguredPagination({
 
         {page === totalPagesQt ? (
           <PaginationItem>
-            <Button className="bg-transparent cursor-pointer">
+            <Button
+              className="bg-transparent cursor-pointer"
+              onClick={() => handleSpecificPageClick(page - 2)}
+            >
               <p>{page - 2}</p>
             </Button>
           </PaginationItem>
@@ -41,7 +46,10 @@ export default function ConfiguredPagination({
 
         {page - 1 > 0 ? (
           <PaginationItem>
-            <Button className="bg-transparent cursor-pointer">
+            <Button
+              className="bg-transparent cursor-pointer"
+              onClick={() => handleSpecificPageClick(page - 1)}
+            >
               {page - 1}
             </Button>
           </PaginationItem>
@@ -55,7 +63,10 @@ export default function ConfiguredPagination({
 
         {page + 1 <= totalPagesQt ? (
           <PaginationItem>
-            <Button className="bg-transparent cursor-pointer">
+            <Button
+              className="bg-transparent cursor-pointer"
+              onClick={() => handleSpecificPageClick(page + 1)}
+            >
               {page + 1}
             </Button>
           </PaginationItem>
@@ -63,7 +74,10 @@ export default function ConfiguredPagination({
 
         {page === 1 ? (
           <PaginationItem>
-            <Button className="bg-transparent cursor-pointer">
+            <Button
+              className="bg-transparent cursor-pointer"
+              onClick={() => handleSpecificPageClick(page + 2)}
+            >
               {page + 2}
             </Button>
           </PaginationItem>

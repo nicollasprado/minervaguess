@@ -90,6 +90,12 @@ export default function PastBetCard({ bet }: PastBetCardProps) {
                 </AccordionContent>
               </li>
             ))}
+            <AccordionContent>
+              <li className="flex justify-between text-[.9rem]">
+                <p>Total</p>
+                <p>{bet.totalMultipliers}x</p>
+              </li>
+            </AccordionContent>
           </ol>
         </AccordionItem>
       </Accordion>

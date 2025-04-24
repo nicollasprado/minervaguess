@@ -55,6 +55,10 @@ export default function PastBets({ userId }: PastBetsProps) {
     }
   };
 
+  const handleSpecificPageClick = (page: number) => {
+    setPage(page);
+  };
+
   return (
     <aside className="min-w-[15%] bg-zinc-500 flex flex-col justify-between">
       <div className="border-b-[0.1dvw] border-white py-[1.5dvh]">
@@ -76,6 +80,7 @@ export default function PastBets({ userId }: PastBetsProps) {
         totalPagesQt={totalPagesQt}
         handleNextPageClick={handleNextPageClick}
         handlePrevPageClick={handlePrevPageClick}
+        handleSpecificPageClick={handleSpecificPageClick}
       />
     </aside>
   );
