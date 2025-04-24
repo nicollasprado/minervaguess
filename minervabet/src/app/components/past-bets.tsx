@@ -19,11 +19,19 @@ export default function PastBets({ userId }: PastBetsProps) {
 
   useEffect(() => {
     const fetchBets = async () => {
-      const bets = await getUserBets(page - 1, userId);
+      let qtCards = 4;
+      const userHeight = window.innerHeight;
+      if (userHeight < 800) {
+        qtCards = 3;
+      } else if (userHeight > 1300) {
+        qtCards = 6;
+      }
+
+      const bets = await getUserBets(page - 1, userId, qtCards);
       setBets(bets);
 
       const totalBetsQt = await getUserTotalBetsQt(userId);
-      setTotalPagesQt(Math.ceil(totalBetsQt / 4));
+      setTotalPagesQt(Math.ceil(totalBetsQt / qtCards));
     };
 
     fetchBets();

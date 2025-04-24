@@ -5,10 +5,11 @@ import { db } from "@/lib/prisma";
 
 export async function getUserBets(
   page: number,
-  userId: string
+  userId: string,
+  qtCards: number
 ): Promise<Bet[]> {
-  const skip = 4 * page;
-  const take = 4;
+  const skip = qtCards * page;
+  const take = qtCards;
 
   const bets = await db.bet.findMany({
     orderBy: {
