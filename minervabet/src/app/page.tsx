@@ -55,7 +55,8 @@ export default function Home() {
             Obtendo dados da partida...
           </h2>
         </main>
-        <PastBets user={user} />
+
+        <PastBets userId={user ? user.id : ""} />
       </div>
     );
   }
@@ -71,7 +72,7 @@ export default function Home() {
             Partida não encontrada
           </h2>
         </main>
-        <PastBets user={user} />
+        <PastBets userId={user ? user.id : ""} />
       </div>
     );
   }
@@ -86,7 +87,7 @@ export default function Home() {
 
         <BetForm user={user} game={gameData} />
       </main>
-      <PastBets user={user} />
+      <PastBets userId={user ? user.id : ""} />
     </div>
   );
 }

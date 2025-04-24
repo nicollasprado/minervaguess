@@ -1,5 +1,4 @@
-import P from "@/components/P";
-import { Bet, CurrentGameBet } from "@/interfaces/betInterface";
+import { Bet } from "@/interfaces/betInterface";
 import getBetsDescriptions from "@/utils/getBetsDescriptions";
 import {
   Accordion,
@@ -10,62 +9,72 @@ import {
 import { ChevronDown } from "lucide-react";
 
 interface PastBetCardProps {
-  bet: Bet | CurrentGameBet;
+  bet: Bet;
 }
 
 export default function PastBetCard({ bet }: PastBetCardProps) {
   if (!bet) {
-    return <p>as</p>;
+    return;
   }
 
   const optionsDescriptions = getBetsDescriptions(bet);
 
-  if ("result" in bet) {
-    return (
-      <div
-        className={`flex flex-col gap-1 text-white bg-black p-2 rounded-md ring-2 ${
-          bet.result ? "ring-green-400" : "ring-red-500"
-        }`}
-      >
-        <P className={`${bet.result ? "text-green-400" : "text-red-500"}`}>
-          {bet.result ? "VITÓRIA" : "DERROTA"}
-        </P>
-        <p>{bet.betPoints} pontos apostados</p>
-        <p className={`${bet.result ? "text-green-400" : "text-red-500"}`}>
-          {bet.result ? "+" : "-"} {bet.receivedPoints} pontos
-        </p>
-        <Accordion type="single" collapsible>
-          <AccordionItem value="item-1">
-            <AccordionTrigger className="flex cursor-pointer">
-              Detalhes <ChevronDown />
-            </AccordionTrigger>
-            <ol>
-              {optionsDescriptions.map((description) => (
-                <li key={description[0]}>
-                  <AccordionContent className="text-[.8rem] flex justify-between">
-                    <p>{description[0]}</p>
-                    <p>{description[1]}x</p>
-                  </AccordionContent>
-                </li>
-              ))}
-            </ol>
-          </AccordionItem>
-        </Accordion>
+  const cardTitle = () => {
+    switch (bet.result) {
+      case null:
+        return "ATIVA";
+      case true:
+        return "VITÓRIA";
+      case false:
+        return "DERROTA";
+    }
+  };
 
-        <p className="text-[0.7rem] truncate w-60 text-muted-foreground">
-          ID: {bet.id}
-        </p>
-      </div>
-    );
-  }
+  const cardTextColor = () => {
+    switch (bet.result) {
+      case null:
+        return "text-yellow-500";
+      case true:
+        return "text-green-400";
+      case false:
+        return "text-red-500";
+    }
+  };
+
+  const cardRingColor = () => {
+    switch (bet.result) {
+      case null:
+        return "ring-yellow-500";
+      case true:
+        return "ring-green-400";
+      case false:
+        return "ring-red-500";
+    }
+  };
 
   return (
     <div
-      className={`flex flex-col gap-1 text-white bg-black p-2 rounded-md ring-2 ring-gray-400`}
+      className={`flex flex-col max-w-[12dvw] gap-1 text-white bg-black p-2 rounded-md ring-2 ${cardRingColor()}`}
     >
-      <P className="text-gray-600">EM ANDAMENTO</P>
-      <p>{bet.points} pontos apostados</p>
-      <p>Multiplicador total:    {bet.totalMultipliers}x</p>
+      <div className="flex justify-between items-center">
+        <p className={`font-normal text-sm ${cardTextColor()}`}>
+          {cardTitle().toString()}
+        </p>
+        <p className="text-[.7rem]">
+          {bet.createdAt.toLocaleTimeString("pt-BR").substring(0, 5)} -{" "}
+          {bet.createdAt.toLocaleDateString("pt-BR")}
+        </p>
+      </div>
+      <p className="text-sm">{bet.betPoints} pontos apostados</p>
+
+      {bet.result === null ? (
+        <p className="text-sm">Multiplicador total: {bet.totalMultipliers}x</p>
+      ) : (
+        <p className={`${cardTextColor()} text-sm`}>
+          {bet.result ? "+" : "-"} {bet.receivedPoints} pontos
+        </p>
+      )}
+
       <Accordion type="single" collapsible>
         <AccordionItem value="item-1">
           <AccordionTrigger className="flex cursor-pointer">
@@ -74,24 +83,24 @@ export default function PastBetCard({ bet }: PastBetCardProps) {
           <ol>
             {optionsDescriptions.map((description) => (
               <li key={description[0]}>
-                <AccordionContent className="text-[.8rem] flex justify-between">
+                <AccordionContent className="text-[.7rem] flex justify-between">
                   <p>{description[0]}</p>
                   <p>{description[1]}x</p>
                 </AccordionContent>
               </li>
             ))}
-
-            <AccordionContent className="text-[.8rem] flex justify-between">
-              <p>TOTAL:</p>
-              <p>{bet.totalMultipliers}x</p>
-            </AccordionContent>
           </ol>
         </AccordionItem>
       </Accordion>
 
-      <p className="text-[0.7rem] truncate w-60 text-muted-foreground">
-        ID: {bet.id}
-      </p>
+      <div>
+        <p className="text-[0.7rem] truncate w-[100%] text-muted-foreground">
+          ID: {bet.id}
+        </p>
+        <p className="text-[0.7rem] truncate w-[100%] text-muted-foreground">
+          MatchId: {bet.gameId}
+        </p>
+      </div>
     </div>
   );
 }
