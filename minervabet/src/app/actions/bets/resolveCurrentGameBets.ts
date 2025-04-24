@@ -1,3 +1,5 @@
+"use server";
+
 import { fetchLeagueFinishedMatch } from "../../../lib/fetchLeagueMatch";
 import { db } from "../../../lib/prisma";
 import { FinishedGameParticipant } from "@/interfaces/gameDataInterface";
