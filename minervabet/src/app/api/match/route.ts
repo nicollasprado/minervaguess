@@ -1,4 +1,4 @@
-import { getCurrentMatch } from "@/lib/getCurrentMatch";
+import { getCurrentMatch } from "@/lib/riot/getCurrentMatch";
 import { NextResponse } from "next/server";
 
 export async function GET() {

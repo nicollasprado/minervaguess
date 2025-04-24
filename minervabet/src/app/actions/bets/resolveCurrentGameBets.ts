@@ -1,6 +1,6 @@
 "use server";
 
-import { fetchLeagueFinishedMatch } from "../../../lib/fetchLeagueMatch";
+import { fetchLeagueFinishedMatch } from "../../../lib/riot/fetchLeagueMatch";
 import { db } from "../../../lib/prisma";
 import { FinishedGameParticipant } from "@/interfaces/gameDataInterface";
 import { Bet, BetProperties } from "@/interfaces/betInterface";

@@ -1,7 +1,7 @@
 import { GameData } from "@/interfaces/gameDataInterface";
 import { fetchLeagueRunningMatch } from "./fetchLeagueMatch";
-import { redis } from "./redis";
-import resolveCurrentGameBets from "../app/actions/bets/resolveCurrentGameBets";
+import { redis } from "../redis";
+import resolveCurrentGameBets from "../../app/actions/bets/resolveCurrentGameBets";
 
 export async function getCurrentMatch(): Promise<GameData | null> {
   try {

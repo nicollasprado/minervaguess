@@ -1,6 +1,6 @@
+import { findUserByCredentials } from "@/app/actions/users/getUser";
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import { findUserByCredentials } from "./user";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
