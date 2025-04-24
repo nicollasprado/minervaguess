@@ -24,7 +24,10 @@ import {
 import P from "@/components/P";
 import { User } from "@/interfaces/userInterface";
 import { GameData } from "@/interfaces/gameDataInterface";
-import { BetData, saveCurrentGameBet } from "@/app/actions/bets/createBetAction";
+import {
+  BetData,
+  saveCurrentGameBet,
+} from "@/app/actions/bets/createBetAction";
 import { BetProperties } from "@/interfaces/betInterface";
 
 const formSchema = z.object({
@@ -336,11 +339,11 @@ export default function BetForm({ user, game }: BetFormProps) {
               </div>
 
               {user ? (
-                <Button className="bg-green-500 hover:bg-green-600 text-black text-xl text-bold w-60 h-15 cursor-pointer">
+                <Button className="bg-green-500 hover:bg-green-600 text-black shadow-md text-xl text-bold w-60 h-15 cursor-pointer">
                   APOSTAR
                 </Button>
               ) : (
-                <Button className="bg-green-500 hover:bg-red-500 text-black text-xl text-bold w-60 h-15 cursor-not-allowed">
+                <Button className="bg-green-500 hover:bg-red-500 text-black shadow-md text-xl text-bold w-60 h-15 cursor-not-allowed">
                   APOSTAR
                 </Button>
               )}

@@ -40,7 +40,7 @@ export default function BetInput({
                   type={inputType}
                   pattern={
                     inputType === "text" || inputType === "number"
-                      ? "^[1-9][0-9]{0,1}$"
+                      ? "^(0|[1-9][0-9]?)$"
                       : undefined
                   }
                   value={inputType === "checkbox" ? undefined : field.value}
