@@ -55,5 +55,5 @@ model MinervaGame {
 
 enum BetStatus {
   IN_PROGRESS
-  FINALIZED
+  FINISHED
 }
