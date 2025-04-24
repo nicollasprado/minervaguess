@@ -12,7 +12,6 @@ export default async function getUser(username: string): Promise<User | null> {
       email: true,
       points: true,
       bets: true,
-      currentGameBets: true,
       createdAt: true,
     },
   });

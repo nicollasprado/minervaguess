@@ -81,9 +81,9 @@ export async function saveCurrentGameBet(
     },
   });
 
-  await db.currentGameBet.create({
+  await db.bet.create({
     data: {
-      points: betData.points,
+      betPoints: betData.points,
       assistBet: assistBet,
       deathBet: deathBet,
       killBet: killBet,

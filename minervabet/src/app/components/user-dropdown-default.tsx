@@ -9,7 +9,7 @@ import LoginForm from "./login-form";
 import RegisterForm from "./register-form";
 import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
-import logoutUserAction from "@/app/actions/logoutUserAction";
+import logoutUserAction from "@/app/actions/auth/logoutUserAction";
 
 export default function UserDropdownDefault() {
   const { status, update } = useSession();

@@ -20,39 +20,25 @@ model Users {
   password String
   points Int
   bets Bet[]
-  currentGameBets CurrentGameBet[]
   createdAt DateTime @default(now())
 }
 
 model Bet {
   id String @id @default(uuid())
+  status BetStatus @default(IN_PROGRESS)
   betPoints Int
-  receivedPoints Int
-  pastUserPoints Int
-  newUserPoints Int
+  receivedPoints Int?
+  pastUserPoints Int?
+  newUserPoints Int?
   killBet String
   assistBet String
   deathBet String
   resultBet String
-  result Boolean
+  result Boolean?
   totalMultipliers Float
   user Users @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
   gameId String
-  createdAt DateTime @default(now())
-}
-
-model CurrentGameBet {
-  id Int @id @default(autoincrement())
-  points Int
-  user Users @relation(fields: [userId], references: [id], onDelete: NoAction)
-  userId String
-  gameId String
-  killBet String
-  assistBet String
-  deathBet String
-  resultBet String
-  totalMultipliers Float
   createdAt DateTime @default(now())
 }
 
@@ -63,12 +49,11 @@ model MinervaGame {
   deaths Int
   assists Int
   kda Float
-  highestKillStreak KillStreak
+  highestKillStreak Int
+  date DateTime @default(now())
 }
 
-enum KillStreak {
-  DOUBLE
-  TRIPLE
-  QUADRA
-  PENTA
+enum BetStatus {
+  IN_PROGRESS
+  FINALIZED
 }

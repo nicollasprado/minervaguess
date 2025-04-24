@@ -1,13 +1,19 @@
 import { fetchLeagueFinishedMatch } from "../../../lib/fetchLeagueMatch";
 import { db } from "../../../lib/prisma";
 import { FinishedGameParticipant } from "@/interfaces/gameDataInterface";
-import { BetProperties } from "@/interfaces/betInterface";
-import { CurrentGameBet } from "@prisma/client";
+import { Bet, BetProperties } from "@/interfaces/betInterface";
 
 const MINERVA_PUUID = process.env.NEXT_PUBLIC_MINERVA_PUUID;
 
-export default async function resolveCurrentGameBets() {
-  const bets = await db.currentGameBet.findMany();
+export default async function resolveInProgressGameBets() {
+  const bets = await db.bet.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+    where: {
+      status: "IN_PROGRESS",
+    },
+  });
 
   if (bets.length === 0) {
     return;
@@ -34,7 +40,9 @@ export default async function resolveCurrentGameBets() {
       const betResult = checkIfWinBet(tempBet, minervaData!);
 
       if (betResult) {
-        newUserPoints += Math.ceil(tempBet.points * tempBet.totalMultipliers);
+        newUserPoints += Math.ceil(
+          tempBet.betPoints * tempBet.totalMultipliers
+        );
       }
 
       if (newUserPoints <= 0) {
@@ -42,30 +50,23 @@ export default async function resolveCurrentGameBets() {
       }
 
       const receivedPoints = betResult
-        ? tempBet.points * tempBet.totalMultipliers
-        : tempBet.points;
+        ? tempBet.betPoints * tempBet.totalMultipliers
+        : tempBet.betPoints;
 
-      let error = false;
       try {
-        await db.bet.create({
+        await db.bet.update({
+          where: {
+            id: tempBet.id,
+          },
           data: {
-            betPoints: tempBet.points,
             receivedPoints: receivedPoints,
             pastUserPoints: user!.points,
             newUserPoints: newUserPoints,
-            killBet: tempBet.killBet,
-            assistBet: tempBet.assistBet,
-            deathBet: tempBet.deathBet,
-            resultBet: tempBet.resultBet,
             result: betResult,
-            totalMultipliers: tempBet.totalMultipliers,
-            userId: user!.id,
-            gameId: tempBet.gameId,
           },
         });
       } catch (e) {
-        console.error("Error creating definitive bet: ", e);
-        error = true;
+        console.error("Error updating bet: ", e);
       }
 
       try {
@@ -79,22 +80,13 @@ export default async function resolveCurrentGameBets() {
         });
       } catch (e) {
         console.error("Error updating user points: ", e);
-        error = true;
-      }
-
-      if (!error) {
-        await db.currentGameBet.delete({
-          where: {
-            id: tempBet.id,
-          },
-        });
       }
     })
   );
 }
 
 function checkIfWinBet(
-  data: CurrentGameBet,
+  data: Bet,
   minervaData: FinishedGameParticipant
 ): boolean {
   const kills = minervaData.kills;

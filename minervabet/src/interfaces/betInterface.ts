@@ -20,27 +20,15 @@ export const BetProperties = {
 export interface Bet {
   id: string;
   betPoints: number;
-  receivedPoints: number;
-  pastUserPoints: number;
-  newUserPoints: number;
-  result: boolean;
-  resultBet: string;
-  killBet: string;
-  deathBet: string;
-  assistBet: string;
-  createdAt: Date;
-  userId: string;
-  gameId: string;
-}
-
-export interface CurrentGameBet {
-  id: number;
-  points: number;
-  resultBet: string;
-  killBet: string;
-  deathBet: string;
-  assistBet: string;
   totalMultipliers: number;
+  receivedPoints: number | null;
+  pastUserPoints: number | null;
+  newUserPoints: number | null;
+  result: boolean | null;
+  resultBet: string;
+  killBet: string;
+  deathBet: string;
+  assistBet: string;
   createdAt: Date;
   userId: string;
   gameId: string;

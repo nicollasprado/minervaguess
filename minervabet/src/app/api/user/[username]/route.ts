@@ -1,4 +1,4 @@
-import getUser from "@/utils/getUser";
+import getUser from "@/app/actions/users/getUser";
 import { NextResponse } from "next/server";
 
 export async function GET(
@@ -15,7 +15,6 @@ export async function GET(
       email: user.email,
       points: user.points.toString(),
       bets: user.bets,
-      currentGameBets: user.currentGameBets,
       createdAt: user.createdAt,
     };
 
