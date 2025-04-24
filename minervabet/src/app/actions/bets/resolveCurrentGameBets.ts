@@ -103,9 +103,10 @@ function checkIfWinBet(
   } else if (
     data.killBet !== "NOT" &&
     data.killBet !== "HIGH" &&
-    data.killBet !== "LOW"
+    data.killBet !== "LOW" &&
+    Number(data.killBet) !== kills
   ) {
-    return Number(data.killBet) === kills;
+    return false;
   }
 
   if (data.assistBet === "HIGH" && assists <= BetProperties.assists.average) {
@@ -118,9 +119,10 @@ function checkIfWinBet(
   } else if (
     data.assistBet !== "NOT" &&
     data.assistBet !== "HIGH" &&
-    data.assistBet !== "LOW"
+    data.assistBet !== "LOW" &&
+    Number(data.assistBet) !== assists
   ) {
-    return Number(data.assistBet) === assists;
+    return false;
   }
 
   if (data.deathBet === "HIGH" && deaths <= BetProperties.deaths.average) {
@@ -133,9 +135,10 @@ function checkIfWinBet(
   } else if (
     data.deathBet !== "NOT" &&
     data.deathBet !== "HIGH" &&
-    data.deathBet !== "LOW"
+    data.deathBet !== "LOW" &&
+    Number(data.deathBet) !== deaths
   ) {
-    return Number(data.deathBet) === deaths;
+    return false;
   }
 
   if (data.resultBet === "WIN" && !minervaData.win) {
