@@ -152,8 +152,8 @@ export default function BetForm({ user, game }: BetFormProps) {
   };
 
   return (
-    <section className="bg-purple-700 m-5 p-5 h-[50%] max-h-[80%]">
-      <h2 className="text-neutral-300 text-center font-bold text-3xl ">
+    <section className="bg-mypurple3 drop-shadow-2xl shadow-2xl rounded-md m-5 p-5 h-[50%] max-h-[80%]">
+      <h2 className="text-neutral-300 text-center font-bold text-3xl">
         APOSTAR
       </h2>
 

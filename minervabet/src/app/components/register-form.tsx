@@ -16,9 +16,18 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const registerFormSchema = z.object({
-  username: z.string().min(1, { message: "O nome de usuário é obrigatório." }),
-  email: z.string().min(1, { message: "O email é obrigatório." }),
-  password: z.string().min(1, { message: "A senha é obrigatória." }),
+  username: z
+    .string()
+    .min(1, { message: "O nome de usuário é obrigatório." })
+    .max(20, { message: "O máximo de caracteres é 20" }),
+  email: z
+    .string()
+    .min(1, { message: "O email é obrigatório." })
+    .max(20, { message: "O máximo de caracteres é 20" }),
+  password: z
+    .string()
+    .min(1, { message: "A senha é obrigatória." })
+    .max(20, { message: "O máximo de caracteres é 20" }),
 });
 
 export type RegisterFormSchema = z.infer<typeof registerFormSchema>;

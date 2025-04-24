@@ -49,7 +49,7 @@ export default function Home() {
     return (
       <div className="flex w-screen h-[100dvh]">
         <PointRank />
-        <main className="min-w-[70dvw] bg-zinc-800 flex flex-col gap-50">
+        <main className="min-w-[70dvw] bg-mypurple flex flex-col gap-50">
           <Header user={user} />
 
           <h2 className="text-gray-400 text-center font-bold text-3xl">
@@ -66,7 +66,7 @@ export default function Home() {
     return (
       <div className="flex w-screen h-[100dvh]">
         <PointRank />
-        <main className="min-w-[70dvw] bg-zinc-800 flex flex-col gap-50">
+        <main className="min-w-[70dvw] bg-mypurple flex flex-col gap-50">
           <Header user={user} />
 
           <h2 className="text-red-400 text-center font-bold text-3xl">
@@ -81,7 +81,7 @@ export default function Home() {
   return (
     <div className="flex w-screen h-[100dvh]">
       <PointRank />
-      <main className="min-w-[70dvw] bg-zinc-800 flex flex-col justify-around">
+      <main className="min-w-[70dvw] bg-mypurple flex flex-col justify-around">
         <Header user={user} />
 
         <TeamsDisplay data={gameData} />

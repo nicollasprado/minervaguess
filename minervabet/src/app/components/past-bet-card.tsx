@@ -55,7 +55,7 @@ export default function PastBetCard({ bet }: PastBetCardProps) {
 
   return (
     <div
-      className={`flex flex-col max-w-[12dvw] gap-1 text-white bg-black p-2 rounded-md ring-2 ${cardRingColor()}`}
+      className={`flex flex-col max-w-[12dvw] gap-1 text-white shadow-2xl drop-shadow-2xl bg-black p-2 rounded-md ring-2 ${cardRingColor()}`}
     >
       <div className="flex justify-between items-center">
         <p className={`font-normal text-sm ${cardTextColor()}`}>

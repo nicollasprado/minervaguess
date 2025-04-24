@@ -16,8 +16,14 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const loginFormSchema = z.object({
-  username: z.string().min(1, { message: "O nome de usuário é obrigatório." }),
-  password: z.string().min(1, { message: "A senha é obrigatória." }),
+  username: z
+    .string()
+    .min(1, { message: "O nome de usuário é obrigatório." })
+    .max(20, { message: "O máximo de caracteres é 20" }),
+  password: z
+    .string()
+    .min(1, { message: "A senha é obrigatória." })
+    .max(20, { message: "O máximo de caracteres é 20" }),
 });
 
 export type LoginFormSchema = z.infer<typeof loginFormSchema>;
