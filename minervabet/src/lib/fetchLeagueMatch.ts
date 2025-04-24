@@ -15,7 +15,14 @@ export async function fetchLeagueRunningMatch() {
 
     return game;
   } catch (error) {
-    console.error("Erro ao buscar dados da partida:", error);
+    if (error instanceof Error && "status" in error) {
+      if (error.status === 404) {
+        console.log("Nenhuma partida em andamento encontrada na API da RIOT");
+      }
+    } else {
+      console.error("Erro ao buscar dados da partida:", error);
+    }
+
     return null;
   }
 }
@@ -31,7 +38,14 @@ export async function fetchLeagueFinishedMatch(matchId: string) {
 
     return game;
   } catch (error) {
-    console.error("Erro ao buscar dados da partida:", error);
+    if (error instanceof Error && "status" in error) {
+      if (error.status === 404) {
+        console.log("Nenhuma partida em andamento encontrada na API da RIOT");
+      }
+    } else {
+      console.error("Erro ao buscar dados da partida:", error);
+    }
+
     return null;
   }
 }
