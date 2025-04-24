@@ -1,5 +1,5 @@
-import { fetchLeagueFinishedMatch } from "./fetchLeagueMatch";
-import { db } from "./prisma";
+import { fetchLeagueFinishedMatch } from "../../../lib/fetchLeagueMatch";
+import { db } from "../../../lib/prisma";
 import { FinishedGameParticipant } from "@/interfaces/gameDataInterface";
 import { BetProperties } from "@/interfaces/betInterface";
 import { CurrentGameBet } from "@prisma/client";
@@ -34,7 +34,7 @@ export default async function resolveCurrentGameBets() {
       const betResult = checkIfWinBet(tempBet, minervaData!);
 
       if (betResult) {
-        newUserPoints += tempBet.points * tempBet.totalMultipliers;
+        newUserPoints += Math.ceil(tempBet.points * tempBet.totalMultipliers);
       }
 
       if (newUserPoints <= 0) {

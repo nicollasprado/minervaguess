@@ -18,7 +18,7 @@ model Users {
   username String @unique
   email String @unique
   password String
-  points Float
+  points Int
   bets Bet[]
   currentGameBets CurrentGameBet[]
   createdAt DateTime @default(now())
