@@ -63,6 +63,7 @@ export default async function resolveInProgressGameBets() {
             pastUserPoints: user!.points,
             newUserPoints: newUserPoints,
             result: betResult,
+            status: "FINISHED",
           },
         });
       } catch (e) {
