@@ -1,3 +1,5 @@
+"use server";
+
 import { User } from "@/interfaces/userInterface";
 import { db } from "@/lib/prisma";
 

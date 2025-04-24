@@ -2,16 +2,16 @@
 
 import ViewerCard from "../components/viewer-card";
 import { useEffect, useState } from "react";
-import { ParsedUser } from "@/interfaces/userInterface";
-import axios from "axios";
+import getUsersPointRank from "../actions/users/getUsersPointRank";
+import { User } from "@/interfaces/userInterface";
 
 export default function PointsRank() {
-  const [rank, setRank] = useState<ParsedUser[]>();
+  const [rank, setRank] = useState<User[]>();
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const usersRank = await axios.get("/api/user/points-rank");
-      setRank(usersRank.data);
+      const usersRank = await getUsersPointRank();
+      setRank(usersRank);
     };
 
     fetchUsers();

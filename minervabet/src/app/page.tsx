@@ -11,6 +11,7 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { User } from "@/interfaces/userInterface";
 import PastBets from "./components/past-bets";
+import getUser from "./actions/users/getUser";
 
 const GetGameData = async () => {
   const response = await axios.get<GameData>("/api/match");
@@ -32,10 +33,10 @@ export default function Home() {
     const fetchUser = async () => {
       try {
         if (username !== "") {
-          const response = await axios.get(`/api/user/${username}`);
+          const user = await getUser(username);
 
-          if (response) {
-            setUser(response.data);
+          if (user) {
+            setUser(user);
           }
         }
       } catch {}

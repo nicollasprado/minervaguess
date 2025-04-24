@@ -5,7 +5,7 @@ import P from "../../components/P";
 interface ViewerCardProps {
   iconUrl?: string;
   username: string;
-  points: string;
+  points: number;
   bets: number;
 }
 
