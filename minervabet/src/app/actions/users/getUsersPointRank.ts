@@ -17,6 +17,7 @@ export default async function getUsersPointRank(
       email: true,
       points: true,
       bets: true,
+      currentGameBets: true,
       createdAt: true,
     },
   });
