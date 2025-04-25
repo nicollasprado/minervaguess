@@ -9,7 +9,9 @@ export async function fetchLeagueRunningMatch() {
 
   try {
     const response = await axios.get<GameData>(apiUrl, {
-      params: { api_key: apiKey },
+      headers: {
+        "X-Riot-Token": apiKey,
+      },
     });
     const game = response.data;
 
@@ -32,7 +34,9 @@ export async function fetchLeagueFinishedMatch(matchId: string) {
 
   try {
     const response = await axios.get<FinishedGameData>(apiUrl, {
-      params: { api_key: apiKey },
+      headers: {
+        "X-Riot-Token": apiKey,
+      },
     });
     const game = response.data;
 
