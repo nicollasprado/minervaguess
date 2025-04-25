@@ -30,6 +30,7 @@ export default function Home() {
   const username = session?.user?.name ? session?.user?.name : "";
 
   const [user, setUser] = useState<User>();
+  const [unsupported, setUnsupported] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -47,7 +48,12 @@ export default function Home() {
     fetchUser();
   }, [username]);
 
-  if (window.innerWidth < 1366 || window.innerHeight < 768) {
+  useEffect(() => {
+    const isSmall = window.innerWidth < 1366 || window.innerHeight < 768;
+    setUnsupported(isSmall);
+  }, []);
+
+  if (unsupported) {
     return (
       <div className="flex justify-center my-[45dvh]">
         <p className="text-2xl">
