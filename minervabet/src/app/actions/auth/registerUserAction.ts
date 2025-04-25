@@ -38,7 +38,7 @@ export async function RegisterUserAction(
       username: data.username,
       email: data.email,
       password: bcrypt.hashSync(data.password),
-      points: 0,
+      points: 100,
     },
   });
 
