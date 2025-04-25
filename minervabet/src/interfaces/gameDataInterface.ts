@@ -30,6 +30,7 @@ export interface FinishedGameParticipant {
   win: boolean;
   largestMultiKill: number;
   firstBloodKill: boolean;
+  championName: string;
   challenges: {
     kda: number;
   };

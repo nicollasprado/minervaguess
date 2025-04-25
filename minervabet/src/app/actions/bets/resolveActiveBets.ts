@@ -7,7 +7,7 @@ import { Bet, BetProperties } from "@/interfaces/betInterface";
 
 const MINERVA_PUUID = process.env.NEXT_PUBLIC_MINERVA_PUUID;
 
-export default async function resolveInProgressGameBets() {
+export default async function resolveActiveBets() {
   const bets = await db.bet.findMany({
     orderBy: {
       createdAt: "desc",
@@ -21,10 +21,23 @@ export default async function resolveInProgressGameBets() {
     return;
   }
 
-  const match = await fetchLeagueFinishedMatch(bets[0].gameId);
-  const minervaData = match!.info.participants.find(
+  const gameId = bets[0].gameId;
+
+  const match = await fetchLeagueFinishedMatch(gameId);
+
+  if (!match) {
+    console.error("match data not found while resolving active bets.");
+    return;
+  }
+
+  const minervaData = match.info.participants.find(
     (participant) => participant.puuid === MINERVA_PUUID
   );
+
+  if (!minervaData) {
+    console.error("MinervaData not found while resolving active bets.");
+    return;
+  }
 
   await Promise.all(
     bets.map(async (tempBet) => {
@@ -83,6 +96,22 @@ export default async function resolveInProgressGameBets() {
         });
       } catch (e) {
         console.error("Error updating user points: ", e);
+      }
+
+      try {
+        await db.minervaGame.create({
+          data: {
+            gameId: gameId,
+            assists: minervaData.assists,
+            kills: minervaData.kills,
+            deaths: minervaData.deaths,
+            kda: minervaData.challenges.kda,
+            championName: minervaData.championName,
+            highestKillStreak: minervaData.largestMultiKill,
+          },
+        });
+      } catch (e) {
+        console.error("Error creating minerva game data: ", e);
       }
     })
   );
