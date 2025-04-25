@@ -47,6 +47,17 @@ export default function Home() {
     fetchUser();
   }, [username]);
 
+  if (window.innerWidth < 1366 || window.innerHeight < 768) {
+    return (
+      <div className="flex justify-center my-[45dvh]">
+        <p className="text-2xl">
+          Tamanho de tela <b>ainda</b> não suportado pelo site, desculpa pelo
+          inconveniente!
+        </p>
+      </div>
+    );
+  }
+
   if (isLoading) {
     return (
       <div className="flex w-screen h-[100dvh]">
