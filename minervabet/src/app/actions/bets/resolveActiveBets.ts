@@ -107,6 +107,7 @@ export default async function resolveActiveBets() {
             deaths: minervaData.deaths,
             kda: minervaData.challenges.kda,
             championName: minervaData.championName,
+            result: minervaData.win,
             highestKillStreak: minervaData.largestMultiKill,
           },
         });

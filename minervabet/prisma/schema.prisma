@@ -50,6 +50,7 @@ model MinervaGame {
   assists Int
   kda Float
   highestKillStreak Int
+  result Boolean
   date DateTime @default(now())
 }
 
