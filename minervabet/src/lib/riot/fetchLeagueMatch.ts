@@ -40,7 +40,7 @@ export async function fetchLeagueFinishedMatch(matchId: string) {
   } catch (error) {
     if (error instanceof Error && "status" in error) {
       if (error.status === 404) {
-        console.log("Nenhuma partida em andamento encontrada na API da RIOT");
+        console.log("Nenhuma partida encontrada na API da RIOT");
       }
     } else {
       console.error("Erro ao buscar dados da partida:", error);

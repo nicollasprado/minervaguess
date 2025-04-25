@@ -18,6 +18,7 @@ export interface GameData {
   gameId: number;
   gameQueueConfigId: number;
   participants: GameParticipant[];
+  gameLength: number;
 }
 
 export interface FinishedGameParticipant {

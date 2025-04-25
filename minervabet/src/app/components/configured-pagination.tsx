@@ -72,7 +72,7 @@ export default function ConfiguredPagination({
           </PaginationItem>
         ) : null}
 
-        {page === 1 ? (
+        {page === 1 && totalPagesQt !== 0 ? (
           <PaginationItem>
             <Button
               className="bg-transparent cursor-pointer"

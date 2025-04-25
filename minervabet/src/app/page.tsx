@@ -13,6 +13,7 @@ import { User } from "@/interfaces/userInterface";
 import PastBets from "./components/past-bets";
 import getUser from "./actions/users/getUser";
 import { GithubIcon } from "lucide-react";
+import P from "@/components/P";
 
 const GetGameData = async () => {
   const response = await axios.get<GameData>("/api/match");
@@ -87,7 +88,16 @@ export default function Home() {
 
         <TeamsDisplay data={gameData} />
 
-        <BetForm user={user} game={gameData} />
+        {gameData.gameLength > 150 ? (
+          <section className="flex flex-col justify-center items-center">
+            <h2 className="text-red-400 text-center font-bold text-3xl">
+              Partida em andamento.
+            </h2>
+            <P>Aguarde até a próxima partida para fazer uma aposta</P>
+          </section>
+        ) : (
+          <BetForm user={user} game={gameData} />
+        )}
 
         <footer>
           <a
