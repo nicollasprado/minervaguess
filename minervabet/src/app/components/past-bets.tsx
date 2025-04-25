@@ -39,14 +39,14 @@ export default function PastBets({ userId }: PastBetsProps) {
 
   if (userId === "") {
     return (
-      <aside className="min-w-[15%] bg-mypurple2 flex flex-col justify-between">
+      <aside className="min-w-[15%] bg-mypurple2 flex flex-col gap-30">
         <div className="border-b-[0.1dvw] border-white py-[1.5dvh]">
           <h2 className="text-center text-white font-semibold text-lg">
-            HISTÓRICO DE APOSTAS
+            HISTÓRICO DE PALPITES
           </h2>
         </div>
 
-        <H2>Conecte-se para ver suas apostas</H2>
+        <H2 className="text-center">Conecte-se para ver seus palpites</H2>
       </aside>
     );
   }
@@ -71,7 +71,7 @@ export default function PastBets({ userId }: PastBetsProps) {
     <aside className="min-w-[15%] bg-mypurple2 flex flex-col justify-between">
       <div className="border-b-[0.1dvw] border-white py-[1.5dvh]">
         <h2 className="text-center text-white font-semibold text-lg">
-          HISTÓRICO DE APOSTAS
+          HISTÓRICO DE PALPITES
         </h2>
       </div>
 
