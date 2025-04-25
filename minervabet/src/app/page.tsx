@@ -93,7 +93,7 @@ export default function Home() {
             <h2 className="text-red-400 text-center font-bold text-3xl">
               Partida em andamento.
             </h2>
-            <P>Aguarde até a próxima partida para fazer uma aposta</P>
+            <P>Aguarde até a próxima partida para fazer um palpite</P>
           </section>
         ) : (
           <BetForm user={user} game={gameData} />

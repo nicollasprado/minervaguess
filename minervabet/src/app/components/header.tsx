@@ -11,7 +11,7 @@ export default function Header({ user }: HeaderProps) {
   return (
     <header className="flex  justify-center gap-10 items-center">
       <h1 className="font-extrabold text-white text-4xl text-center my-[1.5dvh]">
-        MINERVABET
+        MINERVAGUESS
       </h1>
 
       <div className="flex gap-2 items-center">

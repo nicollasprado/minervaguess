@@ -340,11 +340,11 @@ export default function BetForm({ user, game }: BetFormProps) {
 
               {user ? (
                 <Button className="bg-green-500 hover:bg-green-600 text-black shadow-md text-xl text-bold w-60 h-15 cursor-pointer">
-                  APOSTAR
+                  PALPITAR
                 </Button>
               ) : (
                 <Button className="bg-green-500 hover:bg-red-500 text-black shadow-md text-xl text-bold w-60 h-15 cursor-not-allowed">
-                  APOSTAR
+                  PALPITAR
                 </Button>
               )}
             </div>
