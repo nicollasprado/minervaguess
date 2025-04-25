@@ -9,7 +9,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Minervabet",
+  title: "Minervaguess",
   icons: {
     icon: "/favicon.png",
   },
