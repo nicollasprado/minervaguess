@@ -33,7 +33,7 @@ export default function ConfiguredPagination({
           </Button>
         </PaginationItem>
 
-        {page === totalPagesQt ? (
+        {page === totalPagesQt && page - 2 > 0 ? (
           <PaginationItem>
             <Button
               className="bg-transparent cursor-pointer"
@@ -72,7 +72,7 @@ export default function ConfiguredPagination({
           </PaginationItem>
         ) : null}
 
-        {page === 1 && totalPagesQt !== 0 ? (
+        {page === 1 && totalPagesQt !== 0 && page + 2 <= totalPagesQt ? (
           <PaginationItem>
             <Button
               className="bg-transparent cursor-pointer"
