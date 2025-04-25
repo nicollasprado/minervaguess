@@ -24,11 +24,9 @@ import {
 import P from "@/components/P";
 import { User } from "@/interfaces/userInterface";
 import { GameData } from "@/interfaces/gameDataInterface";
-import {
-  BetData,
-  saveCurrentGameBet,
-} from "@/app/actions/bets/createBetAction";
+import { BetData } from "@/app/actions/bets/createBetAction";
 import { BetProperties } from "@/interfaces/betInterface";
+import axios from "axios";
 
 const formSchema = z.object({
   killHigh: z.boolean().optional(),
@@ -139,7 +137,11 @@ export default function BetForm({ user, game }: BetFormProps) {
     };
 
     try {
-      await saveCurrentGameBet(user, game!, finalData);
+      await axios.post("/api/bet", {
+        user: user,
+        game: game,
+        data: finalData,
+      });
       window.alert("Aposta criada com sucesso!");
       window.location.reload();
     } catch (e) {

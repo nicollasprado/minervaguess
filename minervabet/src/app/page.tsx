@@ -69,12 +69,23 @@ export default function Home() {
       <div className="flex w-screen h-[100dvh]">
         <RankGamesAside />
 
-        <main className="min-w-[70dvw] bg-mypurple flex flex-col gap-50">
+        <main className="min-w-[70dvw] bg-mypurple flex flex-col justify-between">
           <Header user={user} />
 
           <h2 className="text-gray-400 text-center font-bold text-3xl">
             Obtendo dados da partida...
           </h2>
+
+          <footer>
+            <a
+              href="https://github.com/nicollasprado"
+              target="_blank"
+              className="flex justify-center items-center gap-2 cursor-pointer text-sm text-muted-foreground mb-5"
+            >
+              <GithubIcon />
+              <p>made by Nicollas Prado</p>
+            </a>
+          </footer>
         </main>
 
         <PastBets userId={user ? user.id : ""} />
@@ -86,12 +97,23 @@ export default function Home() {
     return (
       <div className="flex w-screen h-[100dvh]">
         <RankGamesAside />
-        <main className="min-w-[70dvw] bg-mypurple flex flex-col gap-50">
+        <main className="min-w-[70dvw] bg-mypurple flex flex-col justify-between">
           <Header user={user} />
 
           <h2 className="text-red-400 text-center font-bold text-3xl">
             Partida não encontrada
           </h2>
+
+          <footer>
+            <a
+              href="https://github.com/nicollasprado"
+              target="_blank"
+              className="flex justify-center items-center gap-2 cursor-pointer text-sm text-muted-foreground mb-5"
+            >
+              <GithubIcon />
+              <p>made by Nicollas Prado</p>
+            </a>
+          </footer>
         </main>
         <PastBets userId={user ? user.id : ""} />
       </div>

@@ -10,10 +10,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { RegisterUserAction } from "@/app/actions/auth/registerUserAction";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import axios, { AxiosError } from "axios";
 
 const registerFormSchema = z.object({
   username: z
@@ -43,24 +43,26 @@ export default function RegisterForm() {
   });
 
   const registerOnSubmit = async (data: RegisterFormSchema) => {
-    const registerStatus = await RegisterUserAction(data);
+    try {
+      await axios.post("/api/user/register", data);
 
-    const isError = registerStatus.status != "success";
-    if (isError) {
-      let fieldName = "";
-      switch (registerStatus.field) {
-        case "username":
-          fieldName = "Nome de usuário";
-          break;
-        case "email":
-          fieldName = "Email";
-          break;
-      }
-
-      form.setError(registerStatus.field, {
-        type: "manual",
-        message: `${fieldName} já cadastrado.`,
+      await axios.post("/api/user/login", {
+        username: data.username,
+        password: data.password,
       });
+
+      window.location.reload();
+    } catch (e) {
+      if (e instanceof AxiosError) {
+        const [fieldText, field] = e.response!.statusText.split("/");
+        if (e.status !== 200) {
+          form.setError(field as keyof RegisterFormSchema, {
+            type: "manual",
+            message: `${fieldText} já cadastrado.`,
+          });
+          return;
+        }
+      }
     }
   };
 

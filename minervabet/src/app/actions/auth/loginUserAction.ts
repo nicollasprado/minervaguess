@@ -19,12 +19,12 @@ export default async function loginUserAction(data: LoginFormSchema) {
     if (!(e instanceof Error)) {
       return {
         success: false,
-        message: "Um erro aconteceu, tente novamente mais tardeeee.",
+        message: "Um erro aconteceu, tente novamente mais tarde.",
       };
     }
 
     if ("type" in e && e.type === "CredentialsSignin") {
-      return { success: false, message: "Credenciais inválidos." };
+      return { success: false, message: "Credenciais invalidos." };
     }
 
     return {

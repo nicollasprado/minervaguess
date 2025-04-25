@@ -1,6 +1,5 @@
 "use client";
 
-import loginUserAction from "@/app/actions/auth/loginUserAction";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -11,6 +10,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios, { AxiosError } from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -40,13 +40,18 @@ export default function LoginForm() {
   const [loginError, setLoginError] = useState<[string, boolean]>(["", false]);
 
   const loginOnSubmit = async (data: LoginFormSchema) => {
-    const loginStatus = await loginUserAction(data);
-
-    if (!loginStatus.success) {
-      setLoginError([loginStatus.message, true]);
+    try {
+      await axios.post("/api/user/login", data);
+      window.location.reload();
+    } catch (e) {
+      console.log(e);
+      if (e instanceof AxiosError) {
+        if (e.status !== 200) {
+          setLoginError([e.response!.statusText, true]);
+          return;
+        }
+      }
     }
-
-    window.location.reload();
   };
 
   return (
