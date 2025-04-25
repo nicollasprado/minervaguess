@@ -10,6 +10,9 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: "Minervabet",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
