@@ -1,11 +1,11 @@
 export const BetProperties = {
   kills: {
-    average: 8,
+    average: 7,
     highMultiplier: 1.5,
     lowMultiplier: 1.3,
   },
   assists: {
-    average: 10,
+    average: 8,
     highMultiplier: 1.4,
     lowMultiplier: 1.3,
   },
