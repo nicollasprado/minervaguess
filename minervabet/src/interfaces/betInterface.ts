@@ -15,6 +15,7 @@ export const BetProperties = {
     lowMultiplier: 1.6,
   },
   exactMultiplier: 2,
+  secondsLimitToBet: 100,
 };
 
 export interface Bet {

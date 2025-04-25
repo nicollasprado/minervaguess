@@ -14,6 +14,7 @@ import getUser from "./actions/users/getUser";
 import { GithubIcon } from "lucide-react";
 import P from "@/components/P";
 import RankGamesAside from "./components/rank-games-aside";
+import { BetProperties } from "@/interfaces/betInterface";
 
 const GetGameData = async () => {
   const response = await axios.get<GameData>("/api/match");
@@ -128,7 +129,7 @@ export default function Home() {
 
         <TeamsDisplay data={gameData} />
 
-        {gameData.gameLength > 150 ? (
+        {gameData.gameLength > BetProperties.secondsLimitToBet ? (
           <section className="flex flex-col justify-center items-center">
             <h2 className="text-red-400 text-center font-bold text-3xl">
               Partida em andamento.

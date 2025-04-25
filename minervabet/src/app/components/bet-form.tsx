@@ -26,7 +26,7 @@ import { User } from "@/interfaces/userInterface";
 import { GameData } from "@/interfaces/gameDataInterface";
 import { BetData } from "@/app/actions/bets/createBetAction";
 import { BetProperties } from "@/interfaces/betInterface";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 const formSchema = z.object({
   killHigh: z.boolean().optional(),
@@ -145,6 +145,13 @@ export default function BetForm({ user, game }: BetFormProps) {
       window.alert("Aposta criada com sucesso!");
       window.location.reload();
     } catch (e) {
+      if (e instanceof AxiosError) {
+        if (e.status === 403) {
+          window.alert("Tempo limite para apostar excedido.");
+          window.location.reload();
+        }
+      }
+
       console.error("Error creating bet: ", e);
       form.setError("root", {
         message:
