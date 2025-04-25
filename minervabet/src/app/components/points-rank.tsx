@@ -18,7 +18,7 @@ export default function PointsRank() {
   }, []);
 
   return (
-    <aside className="min-w-[15%] bg-mypurple2 flex flex-col justify-between">
+    <aside className="min-w-[15%] h-full bg-mypurple2 flex flex-col justify-between">
       <div className="border-b-[0.1dvw] border-white py-[1.5dvh]">
         <h2 className="text-center text-white font-semibold text-lg">
           VIEWERS COM MAIS PONTOS

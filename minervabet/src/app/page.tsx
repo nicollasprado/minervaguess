@@ -1,6 +1,5 @@
 "use client";
 
-import PointRank from "./components/points-rank";
 import TeamsDisplay from "./components/teams-display";
 import { GameData } from "@/interfaces/gameDataInterface";
 import axios from "axios";
@@ -14,6 +13,7 @@ import PastBets from "./components/past-bets";
 import getUser from "./actions/users/getUser";
 import { GithubIcon } from "lucide-react";
 import P from "@/components/P";
+import RankGamesAside from "./components/rank-games-aside";
 
 const GetGameData = async () => {
   const response = await axios.get<GameData>("/api/match");
@@ -67,7 +67,8 @@ export default function Home() {
   if (isLoading) {
     return (
       <div className="flex w-screen h-[100dvh]">
-        <PointRank />
+        <RankGamesAside />
+
         <main className="min-w-[70dvw] bg-mypurple flex flex-col gap-50">
           <Header user={user} />
 
@@ -84,7 +85,7 @@ export default function Home() {
   if (!gameData) {
     return (
       <div className="flex w-screen h-[100dvh]">
-        <PointRank />
+        <RankGamesAside />
         <main className="min-w-[70dvw] bg-mypurple flex flex-col gap-50">
           <Header user={user} />
 
@@ -99,7 +100,7 @@ export default function Home() {
 
   return (
     <div className="flex w-screen h-[100dvh]">
-      <PointRank />
+      <RankGamesAside />
       <main className="min-w-[70dvw] bg-mypurple flex flex-col justify-around">
         <Header user={user} />
 
