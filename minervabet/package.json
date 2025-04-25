@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "postinstall": "npx prisma migrate deploy",
     "champions": "node src/utils/scripts/createChampionsJson.js",
     "championsIcons": "node src/utils/scripts/saveChampionsIcons.js",
     "runes": "node src/utils/scripts/createRunesJson.js",
