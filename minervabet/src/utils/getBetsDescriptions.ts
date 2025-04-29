@@ -24,7 +24,9 @@ export default function getBetsDescriptions(
     bet.killBet !== "LOW"
   ) {
     descriptions.push([
-      `Exatamente ${Number(bet.killBet)} eliminações`,
+      `Exatamente ${Number(bet.killBet)} ${
+        Number(bet.killBet) > 1 ? "eliminações" : "eliminação"
+      }`,
       BetProperties.exactMultiplier,
     ]);
   }
@@ -45,7 +47,9 @@ export default function getBetsDescriptions(
     bet.assistBet !== "LOW"
   ) {
     descriptions.push([
-      `Exatamente ${bet.assistBet} assistências`,
+      `Exatamente ${bet.assistBet} assistência${
+        Number(bet.assistBet) > 1 ? "s" : ""
+      }`,
       BetProperties.exactMultiplier,
     ]);
   }
@@ -66,7 +70,7 @@ export default function getBetsDescriptions(
     bet.deathBet !== "LOW"
   ) {
     descriptions.push([
-      `Exatamente ${bet.deathBet} mortes`,
+      `Exatamente ${bet.deathBet} morte${Number(bet.deathBet) > 1 ? "s" : ""}`,
       BetProperties.exactMultiplier,
     ]);
   }

@@ -17,7 +17,7 @@ export default function Header({ user }: HeaderProps) {
       <div className="flex gap-2 items-center absolute right-[25dvw]">
         <div className="text-right">
           <H3>{user ? user.username : "desconectado"}</H3>
-          <P>{user ? user.points.toString() : "0"}</P>
+          <P>{user ? user.points.toString() : "0"} pontos</P>
         </div>
         <UserDropdownDefault />
       </div>

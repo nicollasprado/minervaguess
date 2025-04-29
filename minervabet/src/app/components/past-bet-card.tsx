@@ -66,13 +66,17 @@ export default function PastBetCard({ bet }: PastBetCardProps) {
           {bet.createdAt.toLocaleDateString("pt-BR")}
         </p>
       </div>
-      <p className="text-sm">{bet.betPoints} pontos apostados</p>
+      <p className="text-sm">
+        {bet.betPoints} ponto{bet.betPoints > 1 ? "s" : ""} apostado
+        {bet.betPoints > 1 ? "s" : ""}
+      </p>
 
       {bet.result === null ? (
         <p className="text-sm">Multiplicador total: {bet.totalMultipliers}x</p>
       ) : (
         <p className={`${cardTextColor()} text-sm`}>
-          {bet.result ? "+" : "-"} {bet.receivedPoints} pontos
+          {bet.result ? "+" : "-"} {bet.receivedPoints} ponto
+          {bet.receivedPoints != null && bet.receivedPoints > 1 ? "s" : ""}
         </p>
       )}
 

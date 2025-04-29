@@ -29,7 +29,7 @@ export default function ViewerCard({
       <section>
         <H3>{username}</H3>
         <P>
-          {points} pontos em {bets} bets
+          {points} pontos em {bets} palpite{bets > 1 ? "s" : ""}
         </P>
       </section>
     </div>
