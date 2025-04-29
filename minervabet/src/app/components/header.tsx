@@ -9,12 +9,12 @@ interface HeaderProps {
 
 export default function Header({ user }: HeaderProps) {
   return (
-    <header className="flex  justify-center gap-10 items-center">
-      <h1 className="font-extrabold text-white text-4xl text-center my-[1.5dvh]">
+    <header className="flex gap-10 items-center">
+      <h1 className="m-auto font-extrabold text-white text-4xl my-[1.5dvh]">
         MINERVAGUESS
       </h1>
 
-      <div className="flex gap-2 items-center">
+      <div className="flex gap-2 items-center absolute right-[25dvw]">
         <div className="text-right">
           <H3>{user ? user.username : "desconectado"}</H3>
           <P>{user ? user.points.toString() : "0"}</P>
